@@ -12,11 +12,5 @@ if(isset($_POST['submit'])){
 			echo "Le champ ". $field. " est vide". "<br>";
 		}
 	}
-    if (!$error) 
-    {		
-		$user = $_POST['nom']; 
-		$id = $_POST['passw'];
-		
-	} 
 }
 ?>

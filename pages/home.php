@@ -25,13 +25,9 @@
 <body>
 <header>
   <!-- MENU -->
-  <div>
-    <nav>
-    
-    </nav>
-  </div>
   <div><?php include ("menu.php"); ?>
    </div>
+   
     <div class="container">
 
       <div class="starter-template">
@@ -41,10 +37,32 @@
 
     </div><!-- /.container -->
 
-
-
-
 </header>
+<!-- AU MILIEU -->
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="col-lg-12" style="background-color:blue">
+    Salut tu veux publier qqch ?
+
+    </div> 
+<br />
+    <div class="col-lg-12" style="background-color:gray">
+    publications
+
+    </div>
+  </div>
+  
+  <div class="col-lg-offset-8 col-lg-4"> Wow un evenement!!<br/><br/>
+Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
+Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
+Morbi rhoncus eleifend justo, et semper tellus lacinia in.
+ Nulla posuere blandit quam ut dapibus.
+  Suspendisse potenti. Etiam dapibus laoreet posuere. Proin dignissim justo sed nibh viverra vestibulum non a nulla. Nullam feugiat venenatis dui, eget condimentum leo viverra ac. Nulla at augue sed augue porttitor fermentum ac eget urna. Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
+</div>
+   
+</div>
+
 
 
 <footer></footer>

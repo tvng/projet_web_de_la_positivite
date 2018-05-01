@@ -1,9 +1,10 @@
-
-
 <!-- HTML DU MENU  
     ce code va être "inclus" dans chaque page HTML
     c'est un seul code pour toutes les pages
+     include ("menu.php"); 
+     on le change une seule fois comme ça
 -->
+
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #007179;">
     <div class="container justify-content-end">
         <ul class="nav">

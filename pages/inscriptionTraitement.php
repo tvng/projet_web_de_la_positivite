@@ -14,24 +14,41 @@ if(isset($_POST['submit'])){
 		}
 	}
 }
-if (!$error) 
-{		
+//if ($error == false)
+{
+
+    /*
     $_SESSION['firstName'] = $_POST['firstName'];
     $_SESSION['name'] = $_POST['name'];
     $_SESSION['email'] = $_POST['email']; 
-    $_SESSion['passw'] = $_POST['passw'];
+    $_SESSION['password'] = $_POST['password'];
     $_SESSION['pseudo'] = $_POST['pseudo'];
+    */
 }
+$_POST['name']="Loul";
+$_POST['firstname']="Loul1";
+$_POST['email']="@riendutout";
+$_POST['password']="test4";
+$_POST['type']="etudiant";
+$_POST['pseudo']="freezos";
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+
+    $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+    $sql="INSERT INTO user (name, firstname, email, password, type, pseudo, creation_date, profile_pic, header_pic) 
+        VALUES(" . $_POST['name'] . "," . $_POST['firstname'] . "," . $_POST['email'] . "," .
+        password_hash($_POST['password'],PASSWORD_DEFAULT) . "," . $_POST['type'] . "," . $_POST['pseudo'] . "," . date('Y-m-d') . ", NULL , NULL)";
+    $bdd->exec($sql);
+
+    /*
+    $coregister = $bdd->prepare("INSERT INTO user (name, firstname, email, password, type, pseudo, creation_date) VALUES(?,?,?,?,?,?,?)");
+    $colog = $coregister->execute($_POST['name'],$_POST['firstname'],$_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT),$_POST['type'],$_POST['pseudo'],date('Y-m-d'));
+    */
+    echo "L'inscription est complète. Bienvenue sur ECEperanto !";
 }
 catch (Exception $e)
 {
 	die('Erreur : ' . $e->getMessage());
 }
-
-$colog = $bdd->prepare("INSERT INTO user (name, firstname, email, password, type, pseudo, creation_date) VALUES(" . $_POST['name'] . "," . $_POST['firstname'] . "," . $_POST['email'] . "," . password_hash($mdp,PASSWORD_DEFAULT) . "," . $_POST['type'] . "," . $_POST['pseudo'] . "," . date('Y-m-d') . ")");
-echo "L'inscription est complète. Bienvenue sur ECEperanto !"
 //partir sur la page d'accueil
 ?>

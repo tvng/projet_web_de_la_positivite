@@ -16,20 +16,20 @@ if(isset($_POST['submit'])){
 }
 if (!$error)
 {
-	$user = $_POST['login'];
+	$user = $_POST['email'];
 	$mdp = $_POST['password'];
 }
 
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
 }
 catch (Exception $e)
 {
 	die('Erreur : ' . $e->getMessage());
 }
 
-$colog = $bdd->prepare('SELECT password FROM user WHERE email = '.$user);
+$colog = $bdd->prepare('SELECT password FROM user WHERE email = ?');
 $bol = $colog->execute($user);
 $info = array();
 $coreussi = false;
@@ -40,8 +40,8 @@ if($bol != null)
 		if($data == password_hash($mdp,PASSWORD_DEFAULT))
 		{
 			$coreussi = true;
-			$coid = $bdd->prepare('SELECT * FROM user WHERE mdp = '.password_hash($mdp,PASSWORD_DEFAULT));
-			$info = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
+			$coid = $bdd->prepare('SELECT * FROM user WHERE password = ?');
+			$info = $coid->execute(password_hash($mdp,PASSWORD_DEFAULT));//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 
             //Creating a session for the user who is connecting
             session_start();
@@ -50,6 +50,12 @@ if($bol != null)
             $_SESSION['firstname'] = $info['firstname'];
             $_SESSION['pseudo'] = $info['pseudo'];
             $_SESSION['email'] = $info['email'];
+
+            echo $_SESSION['ID_user'];
+            echo $_SESSION['name'];
+            echo $_SESSION['firstname'];
+            echo $_SESSION['pseudo'];
+            echo $_SESSION['email'];
 		}
 		else
 		{

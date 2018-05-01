@@ -33,34 +33,33 @@
     
     </div>
     -->
-    <input type="submit" class="btn" value="Poster" onClick="poster()"/>
+    <input type="submit" class="btn" name="poster" value="poster" />
 </form>
 
 <?php 
-function post() {
+if (isset($_POST['poster'])){
+    poster();
+  }
+
+function poster() {
     echo("POST DEBUG -----------------");
-    $user_name = "root";
-    $password = "";
-    $database = "eceperanto";
-    $server = "127.0.0.1";
-
-    $db_handle=mysqli_connect($server,$user_name,$password);
-    $db_found=mysqli_select_db($db_handle, $database);
-
-    if(!$db_found){
-        echo("database erreur");
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
     }
-    else {
-        echo(" test ???????????????????????");
+    catch (Exception $e)
+    {
+       die('Erreur : ' . $e->getMessage());
+    }
+
         
-        // On verifie que "description" est rempli, c'est le seul qui est nécessaire
-        if (isset($_POST["desc"]) ){ 
-            $description=$_POST["desc"];
-            //$sql=  requete ici ;
-        }
-        else{
-        }
+    // On verifie que "description" est rempli, c'est le seul qui est nécessaire
+    if (isset($_POST["desc"]) ){ 
+        $description=$_POST["desc"];
+        //$sql=  requete ici ;
     }
+    else{
+    }
+    
 }
 ?>
 

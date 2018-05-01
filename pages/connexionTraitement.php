@@ -1,7 +1,6 @@
 <?php
 if(isset($_POST['submit'])){
 	// Required field names
-	$required = array('login', 'password');
 	$required = array('email', 'passw');
 	// Loop over field names, make sure each one exists and is not empty
 	$error = false;

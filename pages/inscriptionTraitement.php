@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
 }
 $_POST['name']="Loul";
 $_POST['firstname']="Loul1";
-$_POST['email']="@riendutout";
+$_POST['email']="riendutout";
 $_POST['password']="test4";
 $_POST['type']="etudiant";
 $_POST['pseudo']="freezos";
@@ -35,9 +35,9 @@ try
 {
 
     $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
-    $sql="INSERT INTO user (name, firstname, email, password, type, pseudo, creation_date, profile_pic, header_pic) 
-        VALUES(" . $_POST['name'] . "," . $_POST['firstname'] . "," . $_POST['email'] . "," .
-        password_hash($_POST['password'],PASSWORD_DEFAULT) . "," . $_POST['type'] . "," . $_POST['pseudo'] . "," . date('Y-m-d') . ", NULL , NULL)";
+    $sql="INSERT INTO user (name, first_name, email, password, type, pseudo, creation_date, profile_pic, header_pic)
+            VALUES('" . $_POST['name'] . "','" . $_POST['first_name'] . "','" . $_POST['email'] . "','" .
+        password_hash($_POST['password'],PASSWORD_DEFAULT) . "','" . $_POST['type'] . "','" . $_POST['pseudo'] . "','" . date('Y-m-d') . "','". NULL . "','" . NULL . "')";
     $bdd->exec($sql);
 
     /*

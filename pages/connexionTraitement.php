@@ -20,9 +20,11 @@ if (!$error)
 	$mdp = $_POST['password'];
 }
 */
-	if (isset($_POST['email']) && isset($_POST['password']))
-{	
-	
+$user = $_POST['email'];
+$mdp = $_POST['password'];
+
+if (isset($_POST['email']) || isset($_POST['password']))
+{
 	$user = $_POST['email'];
 	$mdp = $_POST['password'];
 
@@ -37,7 +39,7 @@ if (!$error)
 
 	//on verifie que le mail est correct
 	$colog = $bdd->prepare('SELECT password FROM user WHERE email = ?');
-	$bol = $colog->execute(array($user));
+	$bol = $colog->execute(array($user));//Ca devrait pas juste être $user?
 	$info = array();
 	$coreussi = false;
 	if($bol != null)
@@ -54,13 +56,13 @@ if (!$error)
 				session_start();
 				$_SESSION['ID_user'] = $info['ID_user'];
 				$_SESSION['name'] = $info['name'];
-				$_SESSION['firstname'] = $info['firstname'];
+				$_SESSION['first_name'] = $info['first_name'];
 				$_SESSION['pseudo'] = $info['pseudo'];
 				$_SESSION['email'] = $info['email'];
 
 				echo $_SESSION['ID_user'];
 				echo $_SESSION['name'];
-				echo $_SESSION['firstname'];
+				echo $_SESSION['first_name'];
 				echo $_SESSION['pseudo'];
 				echo $_SESSION['email'];
 			}
@@ -77,4 +79,13 @@ if (!$error)
 	$colog->closeCursor();
 	//TADA, on a plus qu'a recuperer les info de l'id qu'on a pour afficher les infos en permanence
 }
+else
+{
+    echo "Les champs sont vides";
+    echo var_dump($user);
+    echo var_dump($mdp);
+    echo var_dump($_POST);
+    echo var_dump($_REQUEST);
+}
+
 ?>

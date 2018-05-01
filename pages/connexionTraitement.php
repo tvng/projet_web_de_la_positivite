@@ -27,7 +27,7 @@ catch (Exception $e)
 	die('Erreur : ' . $e->getMessage());
 }
 
-$colog = $bdd->prepare('SELECT mdp FROM table WHERE login = ?');
+$colog = $bdd->prepare('SELECT password FROM user WHERE login = '.$user);
 $bol = $colog->execute($user);
 $coreussi = false;
 if($bol != null)
@@ -37,18 +37,18 @@ if($bol != null)
 		if($data == $mdp)
 		{
 			$coreussi = true;
-			$coid = $bdd->prepare('SELECT id FROM table WHERE mdp = ?');
+			$coid = $bdd->prepare('SELECT ID_user FROM user WHERE mdp = ?');
 			$id = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 		}
 		else
 		{
-			echo "Bah ça marche pas leul, c'est pas les bons identifiants."."/br";
+			echo "Mot de passe incorrect."."/br";
 		}
 	}
 }
 else
 {
-	echo "Bah ça marche pas leul, ce login exite pas."."/br";	
+	echo "Identifiant inexistant."."/br";
 }
 $colog->closeCursor();
 //TADA, on a plus qu'a recuperer les info de l'id qu'on a pour afficher les infos en permanence

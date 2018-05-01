@@ -4,9 +4,9 @@ if(isset($_POST['submit'])){
 	$required = array('email', 'passw');
 	// Loop over field names, make sure each one exists and is not empty
 	$error = false;
-    foreach($required as $field) 
+    foreach($required as $field)
     {
-        if (empty($_POST[$field])) 
+        if (empty($_POST[$field]))
         {
 			$error = true;
 			echo "Le champ ". $field. " est vide". "<br>";
@@ -14,17 +14,12 @@ if(isset($_POST['submit'])){
 		}
 	}
 }
-if (!$error) 
-<<<<<<< HEAD
+if (!$error)
 {
 	$user = $_POST['login'];
 	$mdp = $_POST['password'];
-=======
-{		
-	$_SESSION['email'] = $_POST['email']; 
-	$_SESSion['passw'] = $_POST['passw'];
->>>>>>> 1a451b8e7cbad5546926cee7708c909f45e64cbf
 }
+
 try
 {
     $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
@@ -45,7 +40,6 @@ if($bol != null)
 		if($data == password_hash($mdp,PASSWORD_DEFAULT))
 		{
 			$coreussi = true;
-<<<<<<< HEAD
 			$coid = $bdd->prepare('SELECT * FROM user WHERE mdp = '.password_hash($mdp,PASSWORD_DEFAULT));
 			$info = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 
@@ -56,10 +50,8 @@ if($bol != null)
             $_SESSION['firstname'] = $info['firstname'];
             $_SESSION['pseudo'] = $info['pseudo'];
             $_SESSION['email'] = $info['email'];
-=======
 			$coid = $bdd->prepare('SELECT ID_user FROM user WHERE mdp = ?');
-			$$_SESSION['ID_user'] = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
->>>>>>> 1a451b8e7cbad5546926cee7708c909f45e64cbf
+			$_SESSION['ID_user'] = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 		}
 		else
 		{

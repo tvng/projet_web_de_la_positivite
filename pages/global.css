@@ -9,3 +9,25 @@ body {
    border-style:solid;
    border-color:#d6d6d6;
 }
+
+#event_box{
+    background-color: #ffffff;
+
+    border-width:1px;
+    border-style:solid;
+    border-color:#d6d6d6;
+    margin-left: 10px;
+
+}
+
+
+#publish_box{
+    background-color: #c8ede5;
+    color:#007179;
+
+    border-width:1px;
+    border-style:solid;
+    border-color:#72bbb0;
+
+}
+

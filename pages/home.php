@@ -27,41 +27,37 @@
   <!-- MENU -->
   <div><?php include ("menu.php"); ?>
    </div>
-   
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div>
-
-    </div><!-- /.container -->
 
 </header>
 <!-- AU MILIEU -->
 
-<div class="row">
-  <div class="col-lg-8">
-    <div class="col-lg-12" style="background-color:blue">
-    Salut tu veux publier qqch ?
-    <?php include ("publish.php"); ?>
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div id="publish_box" class="col-lg-12 rounded p-1">
+      <h4>Salut! Comment te sens-tu ?</h4>
+      <?php include ("publish.php"); ?>
     </div> 
-<br />
+    <br />
     <div class="col-lg-12" style="background-color:gray">
     publications
 
     </div>
   </div>
   
-  <div class="col-lg-offset-8 col-lg-4"> Wow un evenement!!<br/><br/>
-Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
-Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
-Morbi rhoncus eleifend justo, et semper tellus lacinia in.
- Nulla posuere blandit quam ut dapibus.
+  <div id="event_box" class=" col-lg-4 rounded p-1"><h4> Wow un evenement!!</h4><br/><br/>
+  <?php include ("event.php"); ?>
+
+  Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
+  Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
+  Morbi rhoncus eleifend justo, et semper tellus lacinia in.
+  Nulla posuere blandit quam ut dapibus.
   Suspendisse potenti. Etiam dapibus laoreet posuere.
   Proin dignissim justo sed nibh viverra vestibulum non a nulla. 
-  Nullam feugiat venenatis dui, eget condimentum leo viverra ac. Nulla at augue sed augue porttitor fermentum ac eget urna. Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
-</div>
+  Nullam feugiat venenatis dui, eget condimentum leo viverra ac.
+   Nulla at augue sed augue porttitor fermentum ac eget urna. 
+   Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. 
+   Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
+  </div>
    
 </div>
 

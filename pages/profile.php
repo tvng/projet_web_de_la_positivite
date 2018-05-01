@@ -57,7 +57,7 @@ session_start(); // On démarre la session AVANT toute chose
 
 	while ($data = $posts->fetch())
 	{
-			include ("post.php");
+		include ("post.php");
 		echo "<br />";
 	}
    $posts->closeCursor();

@@ -1,12 +1,13 @@
 
 <form method="POST" action="">
+<div class="container-fluid">
     <div class="row">
     photo video poste
 
     </div>
-
+    <div class="row">
     <textarea id="desc" class="form-control" placeholder="Description" required></textarea>
-  
+    </div>
     <!-- emoji -->
     <div class="row">
         <select id="mood" class="custom-select col-sm-3">
@@ -17,7 +18,7 @@
         </select>
 
         <input id="place" type="text" class="form-control col-sm-3" placeholder="Lieu">
-
+    
     </div>
     <!--
     <div class="row">
@@ -34,6 +35,7 @@
     </div>
     -->
     <input type="submit" class="btn" name="poster" value="poster" />
+</div>
 </form>
 
 <?php 

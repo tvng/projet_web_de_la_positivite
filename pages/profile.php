@@ -29,6 +29,39 @@
    </div>
 </header>
 
+<?php
+ $user_name = "root";
+    $password = "";
+    $database = "eceperanto";
+    $server = "127.0.0.1";
+
+    $db_handle=mysqli_connect($server,$user_name,$password);
+    $db_found=mysqli_select_db($db_handle, $database);
+
+    if(!$db_found){
+        echo("database erreur");
+    }
+    else {
+        echo(" test ???????????????????????");
+        
+        $sql="SELECT publication.text, u1.name AS author, u2.name AS utilisator
+		FROM publication
+		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
+		INNER JOIN post ON post.ID_post = publication.ID_post 
+		INNER JOIN user u2 ON u2.ID_user = post.ID_user
+		
+		WHERE u2.ID_user =1";  
+
+		$res=mysqli_query($db_handle, $sql);
+		while ($data = mysqli_fetch_assoc($res) )
+		{
+			include ("post.php");
+			echo "<br />";
+		}
+	
+	}
+?>
+
 
 <footer></footer>
 </body>

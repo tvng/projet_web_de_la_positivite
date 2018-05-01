@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
 }
 if (!$error) 
 {
-	$user = $_POST['login']; 
+	$user = $_POST['login'];
 	$mdp = $_POST['password'];
 }
 try
@@ -27,18 +27,27 @@ catch (Exception $e)
 	die('Erreur : ' . $e->getMessage());
 }
 
-$colog = $bdd->prepare('SELECT password FROM user WHERE login = '.$user);
+$colog = $bdd->prepare('SELECT password FROM user WHERE email = '.$user);
 $bol = $colog->execute($user);
+$info = array();
 $coreussi = false;
 if($bol != null)
 {
 	while($data = $colog->fetch())
 	{
-		if($data == $mdp)
+		if($data == password_hash($mdp,PASSWORD_DEFAULT))
 		{
 			$coreussi = true;
-			$coid = $bdd->prepare('SELECT ID_user FROM user WHERE mdp = '.password_hash($mdp,PASSWORD_DEFAULT));
-			$id = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
+			$coid = $bdd->prepare('SELECT * FROM user WHERE mdp = '.password_hash($mdp,PASSWORD_DEFAULT));
+			$info = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
+
+            //Creating a session for the user who is connecting
+            session_start();
+            $_SESSION['ID_user'] = $info['ID_user'];
+            $_SESSION['name'] = $info['name'];
+            $_SESSION['firstname'] = $info['firstname'];
+            $_SESSION['pseudo'] = $info['pseudo'];
+            $_SESSION['email'] = $info['email'];
 		}
 		else
 		{

@@ -38,6 +38,10 @@
     $db_handle=mysqli_connect($server,$user_name,$password);
     $db_found=mysqli_select_db($db_handle, $database);
 
+    $get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
+        "UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
+
+
     if(!$db_found){
         echo("database erreur");
     }
@@ -50,7 +54,7 @@
 		INNER JOIN post ON post.ID_post = publication.ID_post 
 		INNER JOIN user u2 ON u2.ID_user = post.ID_user
 		
-		WHERE u2.ID_user =1";  
+		WHERE u2.ID_user =1";
 
 		$res=mysqli_query($db_handle, $sql);
 		while ($data = mysqli_fetch_assoc($res) )

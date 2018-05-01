@@ -50,8 +50,6 @@ if($bol != null)
             $_SESSION['firstname'] = $info['firstname'];
             $_SESSION['pseudo'] = $info['pseudo'];
             $_SESSION['email'] = $info['email'];
-			$coid = $bdd->prepare('SELECT ID_user FROM user WHERE mdp = ?');
-			$_SESSION['ID_user'] = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 		}
 		else
 		{

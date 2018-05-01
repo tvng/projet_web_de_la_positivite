@@ -1,1 +1,11 @@
-body { padding-top: 70px; }
+body {
+    padding-top: 70px; 
+    background-color: #ececec !important;
+}
+
+.post_style {
+   background-color: #ffffff;
+   border-width:1px;
+   border-style:solid;
+   border-color:#d6d6d6;
+}

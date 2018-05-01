@@ -1,3 +1,6 @@
+<?php
+session_start(); // On démarre la session AVANT toute chose
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,39 +33,35 @@
 </header>
 
 <?php
- $user_name = "root";
-    $password = "";
-    $database = "eceperanto";
-    $server = "127.0.0.1";
-
-    $db_handle=mysqli_connect($server,$user_name,$password);
-    $db_found=mysqli_select_db($db_handle, $database);
+	try {
+	$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+	}
+	catch (Exception $e)
+	{
+			die('Erreur : ' . $e->getMessage());
+	}
+	
 
     $get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
         "UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
 
-    if(!$db_found){
-        echo("database erreur");
-    }
-    else {
-        echo(" test ???????????????????????");
-        
-        $sql="SELECT publication.text, u1.name AS author, u2.name AS utilisator
-		FROM publication
-		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-		INNER JOIN post ON post.ID_post = publication.ID_post 
-		INNER JOIN user u2 ON u2.ID_user = post.ID_user
-		
-		WHERE u2.ID_user =1";
-
-		$res=mysqli_query($db_handle, $sql);
-		while ($data = mysqli_fetch_assoc($res) )
-		{
-			include ("post.php");
-			echo "<br />";
-		}
 	
+	$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n, u2.name AS utilisator,
+	publication.date, publication.time, publication.text, publication.location, publication.emotion
+	FROM publication
+	INNER JOIN user u1 ON u1.ID_user = publication.ID_author
+	INNER JOIN post ON post.ID_post = publication.ID_post 
+	INNER JOIN user u2 ON u2.ID_user = post.ID_user
+	
+	WHERE u2.ID_user =1");
+
+	while ($data = $posts->fetch())
+	{
+			include ("post.php");
+		echo "<br />";
 	}
+   $posts->closeCursor();
+
 ?>
 
 

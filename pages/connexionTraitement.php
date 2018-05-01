@@ -2,6 +2,7 @@
 if(isset($_POST['submit'])){
 	// Required field names
 	$required = array('login', 'password');
+	$required = array('email', 'passw');
 	// Loop over field names, make sure each one exists and is not empty
 	$error = false;
     foreach($required as $field) 
@@ -10,13 +11,20 @@ if(isset($_POST['submit'])){
         {
 			$error = true;
 			echo "Le champ ". $field. " est vide". "<br>";
+			exit();
 		}
 	}
 }
 if (!$error) 
+<<<<<<< HEAD
 {
 	$user = $_POST['login'];
 	$mdp = $_POST['password'];
+=======
+{		
+	$_SESSION['email'] = $_POST['email']; 
+	$_SESSion['passw'] = $_POST['passw'];
+>>>>>>> 1a451b8e7cbad5546926cee7708c909f45e64cbf
 }
 try
 {
@@ -38,6 +46,7 @@ if($bol != null)
 		if($data == password_hash($mdp,PASSWORD_DEFAULT))
 		{
 			$coreussi = true;
+<<<<<<< HEAD
 			$coid = $bdd->prepare('SELECT * FROM user WHERE mdp = '.password_hash($mdp,PASSWORD_DEFAULT));
 			$info = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 
@@ -48,6 +57,10 @@ if($bol != null)
             $_SESSION['firstname'] = $info['firstname'];
             $_SESSION['pseudo'] = $info['pseudo'];
             $_SESSION['email'] = $info['email'];
+=======
+			$coid = $bdd->prepare('SELECT ID_user FROM user WHERE mdp = ?');
+			$$_SESSION['ID_user'] = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
+>>>>>>> 1a451b8e7cbad5546926cee7708c909f45e64cbf
 		}
 		else
 		{

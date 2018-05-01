@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['submit'])){
 	// Required field names
-	$required = array('login', 'passw');
+	$required = array('login', 'password');
 	// Loop over field names, make sure each one exists and is not empty
 	$error = false;
     foreach($required as $field) 
@@ -14,9 +14,9 @@ if(isset($_POST['submit'])){
 	}
 }
 if (!$error) 
-{		
+{
 	$user = $_POST['login']; 
-	$mdp = $_POST['passw'];
+	$mdp = $_POST['password'];
 }
 try
 {
@@ -37,7 +37,7 @@ if($bol != null)
 		if($data == $mdp)
 		{
 			$coreussi = true;
-			$coid = $bdd->prepare('SELECT ID_user FROM user WHERE mdp = ?');
+			$coid = $bdd->prepare('SELECT ID_user FROM user WHERE mdp = '.password_hash($mdp,PASSWORD_DEFAULT));
 			$id = $coid->execute($data);//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 		}
 		else

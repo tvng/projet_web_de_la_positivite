@@ -31,24 +31,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			if($mdp_vrai)
 			{
 				$coreussi = true;
-				$coid = $bdd->prepare('SELECT * FROM user WHERE password = '.password_hash($mdp,PASSWORD_DEFAULT));
-				$info = $coid->execute();//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
+				$coid = $bdd->prepare('SELECT * FROM user WHERE email = ?');
+				$coid->execute(array($user));//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 
+                $result = $coid->fetch();
                 var_dump($_POST);
-                var_dump($info);
-				//Creating a session for the user who is connecting
-				session_start();
-				$_SESSION['ID_user'] = $info['ID_user'];
-				$_SESSION['name'] = $info['name'];
-				$_SESSION['first_name'] = $info['first_name'];
-				$_SESSION['pseudo'] = $info['pseudo'];
-				$_SESSION['email'] = $info['email'];
 
-				echo $_SESSION['ID_user'];
-				echo $_SESSION['name'];
-				echo $_SESSION['first_name'];
-				echo $_SESSION['pseudo'];
-				echo $_SESSION['email'];
+				$_SESSION['ID_user'] = $result['ID_user'];
+				$_SESSION['name'] = $result['name'];
+				$_SESSION['first_name'] = $result['first_name'];
+				$_SESSION['pseudo'] = $result['pseudo'];
+				$_SESSION['email'] = $result['email'];
+
+				echo "ID USER : " .$_SESSION['ID_user'];
+				echo "nom : " .$_SESSION['name'];
+				echo "fnom : " .$_SESSION['first_name'];
+				echo "pseu : " .$_SESSION['pseudo'];
+				echo "mail : " .$_SESSION['email'];
 			}
 			else
 			{
@@ -68,9 +67,8 @@ else
 {
     echo "Les champs sont vides";
     echo var_dump($user);
-    echo var_dump($password);
+    echo var_dump($mdp);
     echo var_dump($_POST);
-    echo var_dump($_REQUEST);
 }
 
 ?>

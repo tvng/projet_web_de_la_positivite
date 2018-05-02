@@ -74,12 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     //On a plus qu'a recuperer les info de l'id qu'on a pour afficher les infos en permanence
 }
-else
-{
-    echo "Les champs sont vides";
-    echo var_dump($user);
-    echo var_dump($mdp);
-    echo var_dump($_POST);//il sert a quoi ?
-}
+
 
 ?>

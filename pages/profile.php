@@ -41,11 +41,12 @@ session_start(); // On démarre la session AVANT toute chose
 		} 
 	?>
 	
-	<div class="profile_header">
+	<div class="profile_top">
 		<?php 
-			$header_sql = $bdd->query("SELECT header_pic FROM user WHERE ID_user=".$_SESSION['ID_user']);
+			$header_sql = $bdd->query("SELECT header_pic, profile_pic FROM user WHERE ID_user=".$_SESSION['ID_user']);
 			$header_data = $header_sql->fetch();
 			echo '<img src="'.$header_data['header_pic'].'" class="img-fluid" alt="header"> ';
+			echo '<img src="'.$header_data['profile_pic'].'" class="img-fluid profile_top_picture" alt="header"> ';
 		?>
 	</div>
 	

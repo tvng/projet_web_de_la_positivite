@@ -37,7 +37,7 @@ body {
     width: 8vw;
 }
 
-.profile_header{
+.profile_top{
     border-width:1px;
     border-style:solid;
     border-color:#72bbb0;
@@ -46,5 +46,8 @@ body {
     margin-bottom:10px;
     height: 300px;
     overflow: hidden;
-
+}
+.profile_top_picture{
+    position:absolute;
+    
 }

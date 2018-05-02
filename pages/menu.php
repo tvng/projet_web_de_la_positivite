@@ -1,5 +1,5 @@
 <?
-sesion_start();
+session_start();
 ?>
 
 <!-- HTML DU MENU  

@@ -1,5 +1,5 @@
 <?
-sesion_start();
+session_start();
 ?>
 
 <form method="POST" action="">

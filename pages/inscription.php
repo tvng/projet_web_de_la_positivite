@@ -17,24 +17,37 @@
 </html>
 
 <?php
-
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try
         {
+            $empty = true;
+            if($_POST['name'] != null AND $_POST['first_name'] != null AND $_POST['email'] != null AND $_POST['password'] != null AND $_POST['pseudo'] != null)
+            {
+                $empty = false;
+            }
+
             $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
             $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql="INSERT INTO user (name, first_name, email, password, type, pseudo, creation_date, profile_pic, header_pic)
-            VALUES('" . $_POST['name'] . "','" . $_POST['first_name'] . "','" . $_POST['email'] . "','" .
-                password_hash($_POST['password'],PASSWORD_DEFAULT) . "','" . $_POST['type'] . "','" . $_POST['pseudo'] . "','" . date('Y-m-d') . "','". NULL . "','" . NULL . "')";
-            $bdd->exec($sql);
+            $email = test_input($_POST["email"] AND $empty == false);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                echo "Le mail est invalide.";
+            }
+            else
+            {
+                $sql="INSERT INTO user (name, first_name, email, password, type, pseudo, creation_date, profile_pic, header_pic)
+                VALUES('" . $_POST['name'] . "','" . $_POST['first_name'] . "','" . $_POST['email'] . "','" .
+                    password_hash($_POST['password'],PASSWORD_DEFAULT) . "','" . $_POST['type'] . "','" . $_POST['pseudo'] . "','" . date('Y-m-d') . "','". NULL . "','" . NULL . "')";
+                $bdd->exec($sql);
 
-            /*
-            $coregister = $bdd->prepare("INSERT INTO user (name, firstname, email, password, type, pseudo, creation_date) VALUES(?,?,?,?,?,?,?)");
-            $colog = $coregister->execute($_POST['name'],$_POST['firstname'],$_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT),$_POST['type'],$_POST['pseudo'],date('Y-m-d'));
-            */
-            echo "L'inscription est complète. Bienvenue sur ECEperanto !";
+                /*
+                $coregister = $bdd->prepare("INSERT INTO user (name, firstname, email, password, type, pseudo, creation_date) VALUES(?,?,?,?,?,?,?)");
+                $colog = $coregister->execute($_POST['name'],$_POST['firstname'],$_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT),$_POST['type'],$_POST['pseudo'],date('Y-m-d'));
+                */
+                echo "L'inscription est complète. Bienvenue sur ECEperanto !";
+            }
+
         }
         catch (Exception $e)
         {
@@ -48,6 +61,5 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-
 ?>
 

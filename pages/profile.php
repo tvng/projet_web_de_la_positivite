@@ -40,13 +40,15 @@ session_start(); // On démarre la session AVANT toute chose
 			die('Erreur : ' . $e->getMessage());
 		} 
 	?>
-
-	<div id="profile_header">
-	<?php 
-		$profile_header = $bdd->query();
-	?>
-
+	
+	<div class="profile_header">
+		<?php 
+			$header_sql = $bdd->query("SELECT header_pic FROM user WHERE ID_user=".$_SESSION['ID_user']);
+			$header_data = $header_sql->fetch();
+			echo '<img src="'.$header_data['header_pic'].'" class="img-fluid" alt="header"> ';
+		?>
 	</div>
+	
 
 </header>
 <div class="container">

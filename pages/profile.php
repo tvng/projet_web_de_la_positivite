@@ -54,9 +54,9 @@ session_start(); // On démarre la session AVANT toute chose
 
 		while ($data = $posts->fetch())
 		{
-			echo '<div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2">';
+			echo '<div class="container"><div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2">';
 			include ("post.php");
-			echo "</div></div><br />";
+			echo "</div></div></div><br />";
 		}
 	$posts->closeCursor();
 

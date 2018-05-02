@@ -5,8 +5,8 @@ session_start();
 <form method="POST" action="">
 <div class="container-fluid">
     <div class="row">
-    photo video poste
-
+        photo video poste
+        <input type="file" name="fileToUpload" id="fileToUpload">
     </div>
     <div class="row">
     <textarea id="desc" class="form-control" placeholder="Description" required></textarea>
@@ -41,10 +41,37 @@ session_start();
 </div>
 </form>
 
-<?php 
-if (isset($_POST['poster'])){
-    poster();
-  }
+<?php
+    /*
+    // Check if image file is a actual image or fake image
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //Code pour le fichier
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        echo $target_file;
+        echo "Salut le test";
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        }
+    }
+    else{
+        echo "Le submit passe pas";
+    }
+    */
+    if (isset($_POST['poster'])){
+        poster();
+      }
+
 
 function poster() {
     echo("POST DEBUG -----------------");

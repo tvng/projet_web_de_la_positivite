@@ -24,8 +24,8 @@ if (!$error)
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$user = $_POST['email'];
-	$password = $_POST['password'];
-	echo $user.$password;
+	$mdp = $_POST['password'];
+	echo $user.$mdp;
 
 	try
 	{
@@ -69,13 +69,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     else{
         echo "Mot de passe incorrect."."/br";
     }
-    */
+	*/
+	
 
 	if($bol != null)
 	{
-		while($data = $colog->fetch())
-		{
-			if($data == password_hash($mdp,PASSWORD_DEFAULT))
+		$data = $colog->fetch();
+		$mdp_vrai=password_verify($mdp,$data['password']);
+
+			if($mdp_vrai)
 			{
 				$coreussi = true;
 				$coid = $bdd->prepare('SELECT * FROM user WHERE password = '.password_hash($mdp,PASSWORD_DEFAULT));
@@ -101,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			{
 				echo "Mot de passe incorrect."."/br";
 			}
-		}
+		
 	}
 	else
 	{

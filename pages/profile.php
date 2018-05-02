@@ -80,9 +80,8 @@ session_start(); // On démarre la session AVANT toute chose
 		publication.date, publication.time, publication.text, publication.location, publication.emotion
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-		WHERE ID_user=".$_SESSION['ID_user']
-		ORDER BY );
-
+		WHERE ID_user=".$_SESSION['ID_user']);
+//ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 		while ($data = $posts->fetch())
 		{
 			echo '<div class="container"><div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2">';

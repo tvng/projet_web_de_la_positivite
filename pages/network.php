@@ -33,9 +33,25 @@ session_start();
    
 
 </header>
-
+<?php
+    try {
+		$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+    }
+		catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+    } 
+/*
+    $friendlist = $bdd->query("SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
+    "UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'] );
+	while ($fl_data = $friendlist->fetch() )
+	{echo $fl_data['User'];   
+    }
+*/
+?>
 
 <footer></footer>
 </body>
+
 
 </html>

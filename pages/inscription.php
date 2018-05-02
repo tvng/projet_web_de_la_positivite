@@ -18,7 +18,12 @@
 
 <?php
 
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //code pour empêcher de créer des mails doublons dans la BDD
+        //wait on peut sans doute le faire en vérifiant que le INSERT s'est bien fait en précisant que email est une clé unique dans la table de donnée donc ce code sert à rien
+        //$email_check="SELECT ID_user FROM user WHERE email= ".$_POST['email'];
+
         /*
         $name = test_input($_POST["name"]);
         $email = test_input($_POST["email"]);
@@ -26,12 +31,14 @@
         $comment = test_input($_POST["comment"]);
         $gender = test_input($_POST["gender"]);
         */
+        /*
         $_POST['name']="Loul";
         $_POST['first_name']="Loul1";
         $_POST['email']="riendutout";
         $_POST['password']="test4";
         $_POST['type']="etudiant";
         $_POST['pseudo']="freezos";
+        */
         try
         {
             $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');

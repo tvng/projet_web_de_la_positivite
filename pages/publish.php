@@ -1,3 +1,6 @@
+<?
+sesion_start();
+?>
 
 <form method="POST" action="">
 <div class="container-fluid">

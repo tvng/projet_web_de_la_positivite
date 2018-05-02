@@ -35,11 +35,14 @@ session_start();
 </header>
 <!-- AU MILIEU -->
 <div class="container">
+
+  <div class="row justify-content-center"><h4>Salut <?php echo $_SESSION['first_name']; ?> </h4></div>
   <div class="row justify-content-center">
+  
     <div class="col-lg-7">
       <div class="row">
         <div id="publish_box" class="col-lg-12 rounded p-1 mb-2">
-          <h4>Salut! Comment te sens-tu ?</h4>
+          <h4>Veux-tu publier quelque-chose ?</h4>
           <?php include ("publish.php"); ?>
         </div> 
         <br />

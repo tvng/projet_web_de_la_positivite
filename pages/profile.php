@@ -30,18 +30,28 @@ session_start(); // On démarre la session AVANT toute chose
   <!-- MENU -->
   <div><?php include ("menu.php"); ?>
    </div>
-</header>
-<div class="container">
-	<?php
-		try {
-		$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+
+   <?php
+   		try {
+			$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
 		}
 		catch (Exception $e)
 		{
-				die('Erreur : ' . $e->getMessage());
-		}
-		
+			die('Erreur : ' . $e->getMessage());
+		} 
+	?>
 
+	<div id="profile_header">
+	<?php 
+		$profile_header = $bdd->query();
+	?>
+
+	</div>
+
+</header>
+<div class="container">
+	<?php
+		
 		$get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
 			"UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
 

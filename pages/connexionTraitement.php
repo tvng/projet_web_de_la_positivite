@@ -21,7 +21,7 @@ if (!$error)
 }
 */
 
-if (isset($_POST['email']) || isset($_POST['password']))
+if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$user = $_POST['email'];
 	$password = $_POST['password'];
@@ -82,6 +82,7 @@ if (isset($_POST['email']) || isset($_POST['password']))
 				$info = $coid->execute();//attention il prendra le premier id qu'il trouve, s'il y deux comptes identiques on ne pourra jamais se connecter avec le deuxième
 
                 var_dump($_POST);
+                var_dump($info);
 				//Creating a session for the user who is connecting
 				session_start();
 				$_SESSION['ID_user'] = $info['ID_user'];
@@ -114,7 +115,7 @@ else
 {
     echo "Les champs sont vides";
     echo var_dump($user);
-    echo var_dump($mdp);
+    echo var_dump($password);
     echo var_dump($_POST);
     echo var_dump($_REQUEST);
 }

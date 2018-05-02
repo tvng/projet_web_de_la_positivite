@@ -46,6 +46,7 @@
                 $colog = $coregister->execute($_POST['name'],$_POST['firstname'],$_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT),$_POST['type'],$_POST['pseudo'],date('Y-m-d'));
                 */
                 echo "L'inscription est complète. Bienvenue sur ECEperanto !";
+                //rediriger vers connexion une fois que c'est fait
             }
 
         }

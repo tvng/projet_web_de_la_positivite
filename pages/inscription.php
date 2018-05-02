@@ -36,9 +36,9 @@
             }
             else
             {
-                $sql="INSERT INTO user (name, first_name, email, password, type, pseudo, creation_date, profile_pic, header_pic)
+                $sql="INSERT INTO user (name, first_name, email, password, type, pseudo, creation_date)
                 VALUES('" . $_POST['name'] . "','" . $_POST['first_name'] . "','" . $_POST['email'] . "','" .
-                    password_hash($_POST['password'],PASSWORD_DEFAULT) . "','" . $_POST['type'] . "','" . $_POST['pseudo'] . "','" . date('Y-m-d') . "','". NULL . "','" . NULL . "')";
+                    password_hash($_POST['password'],PASSWORD_DEFAULT) . "','" . $_POST['type'] . "','" . $_POST['pseudo'] . "','" . date('Y-m-d') . "')";
                 $bdd->exec($sql);
 
                 /*

@@ -2,7 +2,7 @@
 session_start();
 ?>
 
-<form method="POST" action="">
+<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
 <div class="container-fluid">
     <div class="row">
         photo video poste
@@ -42,14 +42,17 @@ session_start();
 </form>
 
 <?php
-    /*
+
     // Check if image file is a actual image or fake image
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        var_dump($_FILES);
+        var_dump($_POST);
         //Code pour le fichier
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        //Petit test pour s'assurer qu'on créer le bon fichier
         echo $target_file;
-        echo "Salut le test";
+
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -67,7 +70,7 @@ session_start();
     else{
         echo "Le submit passe pas";
     }
-    */
+
     if (isset($_POST['poster'])){
         poster();
       }
@@ -83,13 +86,18 @@ function poster() {
        die('Erreur : ' . $e->getMessage());
     }
 
-        
     // On verifie que "description" est rempli, c'est le seul qui est nécessaire
-    if (isset($_POST["desc"]) ){ 
+    if (isset($_POST["desc"]) ){
         $description=$_POST["desc"];
+
+        //$insert="INSERT INTO publication(ID_author, date, time,/* visibility,*/ location, emotion, text, ID_media, nb_like)
+        //VALUES ('" . $_SESSION['USER_ID'] . "','" . date('Y-m-d') . "','"  . date('h:i:sa') . "','"/* . $_POST['visibility'] . "','"*/ . $_POST['Lieu'] . "','" .
+        //$_POST['mood'] . "','" . $_POST['Description'] . "','" . $_POST['ID_media'] . "',0)";
+
         //$sql=  requete ici ;
     }
     else{
+
     }
     
 }

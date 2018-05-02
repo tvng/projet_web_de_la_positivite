@@ -18,15 +18,16 @@ session_start();
                 <a class="nav-link" href="job.php">Emplois</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="network.php">Mon reseau</a></li>
+          <!--  <li class="nav-item">
+                <a class="nav-link" href="#">Messagerie</a></li> 
+            -->
             <li class="nav-item">
-                <a class="nav-link" href="#">Messagerie</a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Notifications</a></li>
+                <a class="nav-link" href="event.php">Notifications (event)</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#"  aria-haspopup="true" aria-expanded="false">Profil</a>
                 <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="profile.php">Mon profil</a>
-                <a class="dropdown-item" href="#">Paramètres</a>
+                <a class="dropdown-item" href="settings.php">Paramètres</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Se déconnecter</a>
                 </div>

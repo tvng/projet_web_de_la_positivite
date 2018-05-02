@@ -50,6 +50,13 @@ session_start();
 */
 ?>
 
+<h3>Mon reseau</h3>
+
+- afficher les amis  (nom et photo) <br/>
+- rechercher des gens et proposer de les ajouter en ami
+<br />
+- proposer de supprimer des amis  (additionnel)
+
 <footer></footer>
 </body>
 

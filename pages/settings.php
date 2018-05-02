@@ -31,11 +31,10 @@ session_start();
   <!-- MENU -->
   <?php include ("menu.php"); ?>
 </header>
-<h3>Events (sur onglet de notification</h3>
- selon le cdc , notification = notif sur des evenements, donc evenement -> page notif ?
-
-<br /> - ajouter un Events 
-<br /> - afficher les events et bouton pour y participer
+<h3>Settings</h3>
+<br/ >- Modifier profile_pic 
+<br />- modifier header_pic 
+<br />
 <footer></footer>
 </body>
 

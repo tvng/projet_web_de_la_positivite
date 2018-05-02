@@ -1,5 +1,10 @@
 <?php
-session_start(); // On démarre la session AVANT toute chose
+	if (session_status() == PHP_SESSION_NONE)
+	{
+		//redirect
+		//http://localhost/projet_web_de_la_positivite/pages/connexion.php
+	}
+	session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,48 +33,86 @@ session_start(); // On démarre la session AVANT toute chose
 <body>
 <header>
   <!-- MENU -->
-  <div><?php include ("menu.php"); ?>
-   </div>
+  <?php include ("menu.php"); ?>
+</header>
+ <!-- BDD -->
+<?php
+	try {
+		$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+	} 
+?>
 
-   <?php
-   		try {
-			$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
-		}
-		catch (Exception $e)
-		{
-			die('Erreur : ' . $e->getMessage());
-		} 
+	 <!-- Partie du haut : header + pp + prenom & cv etc -->
+<div class="profile_top">
+	<div class="profile_top_header">
+	<?php 
+		$header_sql = $bdd->query("SELECT header_pic, profile_pic, user.name AS uname, first_name, pseudo, user.type AS utype 
+		FROM user WHERE ID_user=".$_SESSION['ID_user']);
+		$header_data = $header_sql->fetch();
+		echo '<img src="'.$header_data['header_pic'].'" class="img" alt="header"> ';
 	?>
-	
-	<div class="profile_top">
-		<?php 
-			$header_sql = $bdd->query("SELECT header_pic, profile_pic, user.name AS uname, first_name, pseudo, user.type AS utype 
-			FROM user WHERE ID_user=".$_SESSION['ID_user']);
-			$header_data = $header_sql->fetch();
-			echo '<img src="'.$header_data['header_pic'].'" class="img" alt="header"> ';
+	</div>
+	<div class="profile_top_pic_name">
+		<div class="row">
+			<div>
+			<?php
+			echo '<img src="'.$header_data['profile_pic'].'" class="img-thumbnail img-fluid profile_top_picture" alt="header"> ';
 			?>
-		<div class="profile_top_pic_name">
-			<div class="row">
-				<div><?php
-				echo '<img src="'.$header_data['profile_pic'].'" class="img-thumbnail img-fluid profile_top_picture" alt="header"> ';
-				?>
-				</div>
-				<div>
-					<h3><?php echo $header_data['uname']." ";
-					echo $header_data['first_name']; 
-					echo " (".$header_data['pseudo'].")";
-					?></h3>	
-					<h4><?php echo $header_data['utype'];?> </h4>
-
-				</div>
-
+			</div>
+			<div>
+				<h3>
+				<?php echo $header_data['uname']." ";
+				echo $header_data['first_name']; 
+				echo " (".$header_data['pseudo'].")";
+				?></h3>	
+				<h4>
+				<?php echo $header_data['utype'];?> </h4>
 			</div>
 		</div>
 	</div>
+	<div class="profile_top_ribbon">
+		<a href="#" class="btn btn-success" role="button">Afficher le CV</a>
+		<a href="#" class="btn btn-success" role="button">Modifier le CV</a>
+		<a href="settings.php" class="btn btn-success" role="button">Modifier le profil</a>
+	</div>
+</div>
+
 	
 
-</header>
+ <!-- partie des posts -->
+<br />
+
+
 <div class="container">
+	<h3>Votre experience</h3>
+	<div class="row justify-content-center"><div class="col-lg-10 rounded p-2 experience_style">
+	- Afficher l'experience -
+
+	
+	<a href="#" class="btn btn-success" role="button">ajouter un nouveau poste!</a>
+	- on peut ajouter le poste dans un "modal" avec un form dedans -
+	</div>
+	</div>
+
+</div>
+
+<br />Tant qu'on y pense il faudrait rediriger le site vers connexion.php si ya pas de sessinon started 
+<br/>(cf plus haut dans le code)
+<br />
+<br />
+<div class="container">
+
+	<h3>Publications</h3>
+
+	
+ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
+<br />
+	+ AFFICHER LES POSTS PARTAGES 
+
 	<?php
 		
 		$get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
@@ -81,12 +124,11 @@ session_start(); // On démarre la session AVANT toute chose
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
 		WHERE ID_user=".$_SESSION['ID_user']);
-//ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 		while ($data = $posts->fetch())
 		{
-			echo '<div class="container"><div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2">';
+			echo '<div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2">';
 			include ("post.php");
-			echo "</div></div></div><br />";
+			echo "</div></div><br />";
 		}
 	$posts->closeCursor();
 

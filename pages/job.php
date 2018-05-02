@@ -33,7 +33,7 @@ session_start();
    
 
 </header>
-
+- afficher les emplois dispos et la possibilite de postuler
 
 <footer></footer>
 </body>

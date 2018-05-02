@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if(isset($_POST['submit'])){
 	// Required field names
 	$required = array('email', 'passw');

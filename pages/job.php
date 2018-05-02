@@ -1,3 +1,7 @@
+<?
+sesion_start();
+?>
+
 <!-- Pour les propositions d'emplois
 on fait un seul modèle qui sera appelé plusieurs fois -->
 

@@ -1,6 +1,9 @@
+<?
+sesion_start();
+?>
+
 <!-- post 
 On fait un seul modèle qui sera appelé plusieurs fois -->
-
 
 <div class="container post_style">
     <div class="row">

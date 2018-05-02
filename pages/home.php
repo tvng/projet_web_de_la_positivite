@@ -1,3 +1,7 @@
+<?
+sesion_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,13 +51,13 @@
   <div id="event_box" class=" col-lg-4 rounded p-1"><h4> Wow un evenement!!</h4><br/><br/>
   <?php include ("event.php"); ?>
 
-  Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
-  Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
-  Morbi rhoncus eleifend justo, et semper tellus lacinia in.
-  Nulla posuere blandit quam ut dapibus.
-  Suspendisse potenti. Etiam dapibus laoreet posuere.
-  Proin dignissim justo sed nibh viverra vestibulum non a nulla. 
-  Nullam feugiat venenatis dui, eget condimentum leo viverra ac.
+   Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
+   Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
+   Morbi rhoncus eleifend justo, et semper tellus lacinia in.
+   Nulla posuere blandit quam ut dapibus.
+   Suspendisse potenti. Etiam dapibus laoreet posuere.
+   Proin dignissim justo sed nibh viverra vestibulum non a nulla. 
+   Nullam feugiat venenatis dui, eget condimentum leo viverra ac.
    Nulla at augue sed augue porttitor fermentum ac eget urna. 
    Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. 
    Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.

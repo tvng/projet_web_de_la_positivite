@@ -15,7 +15,9 @@ session_start();
             <li class="nav-item">
                 <a class="nav-link" href="home.php">Accueil</a></li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Emplois</a></li>
+                <a class="nav-link" href="job.php">Emplois</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="network.php">Mon reseau</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Messagerie</a></li>
             <li class="nav-item">

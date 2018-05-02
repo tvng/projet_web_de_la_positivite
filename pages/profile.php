@@ -43,11 +43,28 @@ session_start(); // On démarre la session AVANT toute chose
 	
 	<div class="profile_top">
 		<?php 
-			$header_sql = $bdd->query("SELECT header_pic, profile_pic FROM user WHERE ID_user=".$_SESSION['ID_user']);
+			$header_sql = $bdd->query("SELECT header_pic, profile_pic, user.name AS uname, first_name, pseudo, user.type AS utype 
+			FROM user WHERE ID_user=".$_SESSION['ID_user']);
 			$header_data = $header_sql->fetch();
-			echo '<img src="'.$header_data['header_pic'].'" class="img-fluid" alt="header"> ';
-			echo '<img src="'.$header_data['profile_pic'].'" class="img-fluid profile_top_picture" alt="header"> ';
-		?>
+			echo '<img src="'.$header_data['header_pic'].'" class="img" alt="header"> ';
+			?>
+		<div class="profile_top_pic_name">
+			<div class="row">
+				<div><?php
+				echo '<img src="'.$header_data['profile_pic'].'" class="img-thumbnail img-fluid profile_top_picture" alt="header"> ';
+				?>
+				</div>
+				<div>
+					<h3><?php echo $header_data['uname']." ";
+					echo $header_data['first_name']; 
+					echo " (".$header_data['pseudo'].")";
+					?></h3>	
+					<h4><?php echo $header_data['utype'];?> </h4>
+
+				</div>
+
+			</div>
+		</div>
 	</div>
 	
 
@@ -56,14 +73,15 @@ session_start(); // On démarre la session AVANT toute chose
 	<?php
 		
 		$get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
-			"UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
+			"UNION SELECT ID_user2 as UserFROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
 
 		
 		$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n,
 		publication.date, publication.time, publication.text, publication.location, publication.emotion
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-		WHERE u1.ID_user =10");
+		WHERE ID_user=".$_SESSION['ID_user']
+		ORDER BY );
 
 		while ($data = $posts->fetch())
 		{

@@ -59,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             echo "pseu : " .$_SESSION['pseudo'];
             echo "mail : " .$_SESSION['email'];
             */
+            header("http://localhost/projet_web_de_la_positivite/pages/home.php");
+            exit;
         }
         else
         {

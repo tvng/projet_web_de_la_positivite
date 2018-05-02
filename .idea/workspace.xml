@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="71329743-5d36-427d-b8bf-5d4564ca9315" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/connexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/connexion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/connexionTraitement.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/connexionTraitement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/inscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/inscription.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,20 +14,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="inscription.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="inscription.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/inscription.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="39" column="94" lean-forward="true" selection-start-line="39" selection-start-column="94" selection-end-line="39" selection-end-column="94" />
+            <state relative-caret-position="289">
+              <caret line="35" column="44" lean-forward="true" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="connexion.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="connexion.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/connexion.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+            <state relative-caret-position="275">
+              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -47,9 +45,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pages/inscription.php" />
         <option value="$PROJECT_DIR$/pages/connexionTraitement.php" />
         <option value="$PROJECT_DIR$/pages/connexion.php" />
+        <option value="$PROJECT_DIR$/pages/inscription.php" />
       </list>
     </option>
   </component>
@@ -62,7 +60,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-17" />
     <option name="width" value="1718" />
     <option name="height" value="1089" />
@@ -121,7 +119,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1797000" />
+    <option name="totallyTimeSpent" value="2651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="0" width="1374" height="871" extended-state="0" />
@@ -192,17 +190,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/inscription.php">
+    <entry file="file://$PROJECT_DIR$/pages/connexion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="39" column="94" lean-forward="true" selection-start-line="39" selection-start-column="94" selection-end-line="39" selection-end-column="94" />
+        <state relative-caret-position="275">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/connexion.php">
+    <entry file="file://$PROJECT_DIR$/pages/inscription.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+        <state relative-caret-position="289">
+          <caret line="35" column="44" lean-forward="true" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
         </state>
       </provider>
     </entry>

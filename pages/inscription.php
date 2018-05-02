@@ -29,12 +29,15 @@
             $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
             $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $email = test_input($_POST["email"] AND $empty == false);
+            $emailvalide = true;
+            $email = test_input($_POST["email"]);
             if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             {
                 echo "Le mail est invalide.";
+                $emailvalide = false;
             }
-            else
+
+            if($emailvalide == true AND $empty == false)
             {
                 $sql="INSERT INTO user (name, first_name, email, password, type, pseudo, creation_date)
                 VALUES('" . $_POST['name'] . "','" . $_POST['first_name'] . "','" . $_POST['email'] . "','" .

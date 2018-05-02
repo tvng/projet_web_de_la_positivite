@@ -31,36 +31,37 @@ session_start(); // On démarre la session AVANT toute chose
   <div><?php include ("menu.php"); ?>
    </div>
 </header>
+<div class="container">
+	<?php
+		try {
+		$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+		}
+		catch (Exception $e)
+		{
+				die('Erreur : ' . $e->getMessage());
+		}
+		
 
-<?php
-	try {
-	$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
-	}
-	catch (Exception $e)
-	{
-			die('Erreur : ' . $e->getMessage());
-	}
-	
+		$get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
+			"UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
 
-    $get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
-        "UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
+		
+		$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n,
+		publication.date, publication.time, publication.text, publication.location, publication.emotion
+		FROM publication
+		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
+		WHERE u1.ID_user =10");
 
-	
-	$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n,
-	publication.date, publication.time, publication.text, publication.location, publication.emotion
-	FROM publication
-	INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-	WHERE u1.ID_user =10");
+		while ($data = $posts->fetch())
+		{
+			echo '<div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2">';
+			include ("post.php");
+			echo "</div></div><br />";
+		}
+	$posts->closeCursor();
 
-	while ($data = $posts->fetch())
-	{
-		include ("post.php");
-		echo "<br />";
-	}
-   $posts->closeCursor();
-
-?>
-
+	?>
+</div>
 
 <footer></footer>
 </body>

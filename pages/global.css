@@ -29,5 +29,10 @@ body {
     border-style:solid;
     border-color:#72bbb0;
 
+
 }
 
+.profile_pic {
+    padding-left: 10px; 
+    width: 8vw;
+}

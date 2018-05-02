@@ -17,7 +17,7 @@
         <option value="3">!!!!!!!!!!!</option>
         </select>
 
-        <input id="place" type="text" class="form-control col-xs-3" placeholder="Lieu">
+        <input id="place" type="text" class="form-control col-sm-3" placeholder="Lieu">
     
     </div>
     <!--

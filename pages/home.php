@@ -30,38 +30,64 @@
 
 </header>
 <!-- AU MILIEU -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="row">
+        <div id="publish_box" class="col-lg-12 rounded p-1 mb-2">
+          <h4>Salut! Comment te sens-tu ?</h4>
+          <?php include ("publish.php"); ?>
+        </div> 
+        <br />
+      </div>
+      <div class="row">
+        
+        <?php
+          try {
+          $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+          }
+          catch (Exception $e)
+          {
+              die('Erreur : ' . $e->getMessage());
+          }
+          
+          $posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n,
+          publication.date, publication.time, publication.text, publication.location, publication.emotion
+          FROM publication
+          INNER JOIN user u1 ON u1.ID_user = publication.ID_author
+          WHERE u1.ID_user =10");
 
-<div class="row justify-content-center">
-  <div class="col-lg-7">
-    <div id="publish_box" class="col-lg-12 rounded p-1">
-      <h4>Salut! Comment te sens-tu ?</h4>
-      <?php include ("publish.php"); ?>
-    </div> 
-    <br />
-    <div class="col-lg-12" style="background-color:gray">
-    publications
+          while ($data = $posts->fetch())
+          {
+            echo '<div class="col-lg-12 post_style rounded p-2">';
+            include ("post.php");
+            echo "</div><br />";
+          }
+          $posts->closeCursor();
 
+        ?>
+
+      </div>
     </div>
-  </div>
-  
-  <div id="event_box" class=" col-lg-4 rounded p-1"><h4> Wow un evenement!!</h4><br/><br/>
-  <?php include ("event.php"); ?>
+    
+    <div id="event_box" class=" col-lg-4 rounded p-1"><h4> Wow un evenement!!</h4><br/><br/>
+    <?php include ("event.php"); ?>
 
-  Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
-  Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
-  Morbi rhoncus eleifend justo, et semper tellus lacinia in.
-  Nulla posuere blandit quam ut dapibus.
-  Suspendisse potenti. Etiam dapibus laoreet posuere.
-  Proin dignissim justo sed nibh viverra vestibulum non a nulla. 
-  Nullam feugiat venenatis dui, eget condimentum leo viverra ac.
-   Nulla at augue sed augue porttitor fermentum ac eget urna. 
-   Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. 
-   Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
+    Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
+    Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
+    Morbi rhoncus eleifend justo, et semper tellus lacinia in.
+    Nulla posuere blandit quam ut dapibus.
+    Suspendisse potenti. Etiam dapibus laoreet posuere.
+    Proin dignissim justo sed nibh viverra vestibulum non a nulla. 
+    Nullam feugiat venenatis dui, eget condimentum leo viverra ac.
+    Nulla at augue sed augue porttitor fermentum ac eget urna. 
+    Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. 
+    Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
+    </div>
+    
   </div>
-   
+
 </div>
-
-
 
 <footer></footer>
 </body>

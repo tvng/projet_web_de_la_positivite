@@ -11,13 +11,14 @@
                 <option value="professor">Professeur</option>
                 </select><br>
             <p> Pseudo : <input type="text" name="pseudo" /></p><br>    
-            <input type="submit" value="Soumettre" />
+            <input type="submit" value="Inscription" />
         </form>
     </body>
 </html>
 
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Inscription'])) {
+        echo "INSCRIPTION !";
         try
         {
             $empty = true;

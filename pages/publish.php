@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 ?>
 
@@ -15,28 +15,26 @@ session_start();
     <div class="row">
         <select id="mood" name="Emotion" class="custom-select col-sm-3">
         <option selected>Mood</option>
-        <option value="1">:)</option>
-        <option value="2">:(</option>
-        <option value="3">!!!!!!!!!!!</option>
+        <option value="happy">:)</option>
+        <option value="sad">:(</option>
+        <option value="excited">!!!!!!!!!!!</option>
         </select>
 
         <input id="place" name="Lieu" type="text" class="form-control col-sm-3" placeholder="Lieu">
     
     </div>
-    <!--
+
     <div class="row">
 
         <label>Visibilité : </label>
-        <select class="custom-select col-sm-2 ">
-        <option selected value="friends">Mes amis</option>
-        <option value="everyone">Public</option>
-        <option value="me">Moi uniquement</option>
+        <select name="Visible" class="custom-select col-sm-2 ">
+        <option selected value="Friends only">Mes amis</option>
+        <option value="Everyone">Public</option>
+        <option value="Myself only">Moi uniquement</option>
         </select>
 
-        
-    
     </div>
-    -->
+
     <input type="submit" class="btn" name="poster" value="poster" />
 </div>
 </form>
@@ -49,7 +47,7 @@ session_start();
 
 
 function poster() {
-    echo("POST DEBUG -----------------");
+    echo("POST DEBUG -----------------<br>");
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
     }
@@ -61,41 +59,50 @@ function poster() {
 
     // On verifie que le champs "Description" est rempli, c'est le seul qui est nécessaire
     if (isset($_POST["Description"])){
+        //Test pour vérifier que le form fonctionnne
+        /*
         var_dump($_FILES);
         var_dump($_POST);
-        //Tentatives de créer des dossiers en fonction du user
-        /*
-        $target_dir = $_SESSION['ID_user']."_uploads";
+        */
+        $target_dir = $_SESSION['ID_user']."_uploads/";
         if (!is_dir($target_dir)){
             mkdir($target_dir);
         }
-        */
-        $target_dir = "uploads/";
+
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         //Petit test pour s'assurer qu'on créer le bon fichier
-        echo $target_file;
+        //echo $target_file."<br>";
 
+        //Tests d'intégrité du fichier (taille, type, non doublon etc)
         $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
         if($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+            if (file_exists($target_file)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
         } else {
-            echo "File is not an image.";
+            echo "File is not an image.<br>";
             $uploadOk = 0;
         }
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file) && $uploadOk!== 0) {
             echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         }
-        $insert="INSERT INTO publication(ID_author, date, time,/* visibility,*/ location, emotion, text, media_link)
-        VALUES ('" . 10 . "','" . date('Y-m-d') . "','"  . date('h:i:sa') . "','"/* . $_POST['visibility'] . "','"*/ . $_POST['Lieu'] . "','" .
+        $sql="INSERT INTO publication(ID_author, date, time, visibility, location, emotion, text, media_link)
+        VALUES ('" . $_SESSION['ID_user'] . "','" . date('Y-m-d') . "','"  . date('h:i:s') . "','" . $_POST['Visible'] . "','" . $_POST['Lieu'] . "','" .
         $_POST['Emotion'] . "','" . $_POST['Description'] . "','" . $target_file . "')";
-
-        //$sql=  requete ici ;
+        echo $sql;
+        $bdd->exec($sql);
     }
     else{
-
+        echo "Description vide";
     }
     
 }

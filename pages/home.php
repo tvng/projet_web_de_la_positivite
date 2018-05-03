@@ -78,7 +78,7 @@ session_start();
     </div>
     
     <div id="event_box" class=" col-lg-4 rounded p-1"><h4> Wow un evenement!!</h4><br/><br/>
-    <?php include ("event.php"); ?>
+    
 
     Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
     Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 

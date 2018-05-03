@@ -1,23 +1,50 @@
-<!DOCTYPE html>
-<html>
-    <body>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-            <p> Nom : <input type="text" name="name" /></p><br>
-            <p> Prénom : <input type="text" name="first_name" /></p><br>
-            <p> Adresse e-mail : <input type="text" name="email" /></p><br>
-            <p> Mot de passe : <input type="password" name="password" /></p><br>
-            Statut : <select name="type">
+<div class="container">
+    <div class="inscription col-lg-6 mx-auto">
+        <h2 class="text-center">Inscrivez-vous!</h2>
+        <h4 class="text-center">Bâtissez votre réseau avec des milliers d'utilisateurs.</h4>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+            
+                
+            <div class="row">
+            <div class="col">
+            <div class="form-group">  
+            <label> Nom :</label> <input type="text" class="form-control" placeholder="Doe" name="name" />
+            </div>
+            </div>
+            <div class="col">
+            <div class="form-group">        
+            <label> Prénom :</label> <input type="text" class="form-control" placeholder="John" name="first_name" />
+            </div>    
+            </div>
+            </div>
+           
+          
+            <div class="form-group">        
+            <label> Adresse e-mail :</label> <input type="text" class="form-control" placeholder="mail@mail.com" name="email" />
+            </div>
+            <div class="form-group">        
+            <label> Mot de passe :</label> <input type="password" class="form-control" name="password" />
+            </div>
+
+            <div class="form-group">        
+            <label> Statut au sein de l'Ecole :</label> 
+            <select class="form-control" name="type">
                 <option value="student">Etudiant</option>
                 <option value="professor">Professeur</option>
-                </select><br>
-            <p> Pseudo : <input type="text" name="pseudo" /></p><br>    
-            <input type="submit" value="Soumettre" />
+            </select>
+            </div>
+            <div class="form-group">        
+            <label> Pseudo :</label>  <input type="text" class="form-control" name="pseudo" />
+            </div>    
+            <input class="btn" type="submit" name="Inscription" value="Inscription" />
+            <br /><br />
         </form>
-    </body>
-</html>
+    </div>
+</div>
 
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Inscription'])) {
+        echo "INSCRIPTION !";
         try
         {
             $empty = true;
@@ -50,7 +77,7 @@
                 */
                 echo "L'inscription est complète. Bienvenue sur ECEperanto !";
                 //rediriger vers connexion une fois que c'est fait
-                header("http://localhost/projet_web_de_la_positivite/pages/connexion.php");
+                header("localhost/projet_web_de_la_positivite/pages/connexion.php");
                 exit;
             }
 

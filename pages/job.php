@@ -35,15 +35,51 @@ session_start();
 <?php include ("menu.php");
 session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+try
+{
+    $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+
 $instruct = "SELECT COUNT(ID_job) FROM job";
 $number = $bdd->exec($instruct);
+$taken = array();
+$not_taken = array();
 
-for($id_job = "1"; $id_job <= $number ; $id_job++)
+for($id_job = 1; $id_job <= $number ; $id_job++)
+{
+    $applied = $bdd->prepare('SELECT ID_job FROM job_taken WHERE ID_job = ? AND ID_user = ?')
+        $applied->execute(array($id_job, $SESSION["ID_user"]));
+        $empty = $applied->fetch();
+        if($empty = null)
+        {
+            //ca va en bas dans la liste de job pour lequelle on a pas applied
+            array_push($not_taken, $id_job);
+        }
+        else
+        {
+            //ca va en haut dans la liste des pending jobs
+            array_push($taken, $id_job);
+        }
+    }
+
+//on peut découper mieux que ça mais pour l'instant ça devrait donner
+foreach($taken as $id_taken)
 {
     $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
-    $sql->execute(array($id_job));
+    $sql->execute(array($id_taken));
+    $info = $sql->fetch();
+    echo "Vous attendez la réponse pour l'offre de " . $info['company'] . ".\n";
+}
+echo "\n \n";
+foreach($not_taken as $id_not_taken)
+{
+    $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
+    $sql->execute(array($id_not_taken));
     $info = $sql->fetch();
     echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
     echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
@@ -51,6 +87,8 @@ for($id_job = "1"; $id_job <= $number ; $id_job++)
 }
 
 ?>
+
+
 
 <footer></footer>
 </body>

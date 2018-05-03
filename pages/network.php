@@ -59,7 +59,37 @@ session_start();
 		 );
 ?>
 
-<div class="container-fluid">
+<!-- RECHERCE D'AMI -->
+<div class="container col-sm-8" >
+	<h3>Rechercher une personne</h3>
+	<form class="form-inline" method="POST">
+    <input type="text" class="form-control" name="chercher_ami" placeholder="Search">
+    <input type="submit" class="btn" value="Chercher">
+	</form>
+</div>
+
+
+
+
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+	
+}
+?>
+
+
+
+
+
+<!--  invitations           -->
+<div class="container col-sm-8" >
+	<h3>Mes invitations</h3>
+		</div>
+
+<!--  AFFICHAGE DES AMIS -->
+<div class="container col-sm-8" >
 	<h3>Mon reseau</h3>
 <div class="card-columns">
 <?php	
@@ -71,8 +101,9 @@ session_start();
 			<h3 class="card-title">'.$fl_data["name"].' '.$fl_data["first_name"].'</h3>
 			<a href="#" class="btn btn-success">Voir le profil</a>
 			<a href="#" class="btn btn-outline-success">Supprimer des amis</a>
-		</div>';
+			</div>';
 			echo ""."</div>"; 
+			
 		}
 
 ?></div>

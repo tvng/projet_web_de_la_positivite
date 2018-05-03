@@ -73,6 +73,7 @@ body {
 
 
 .card-columns {
-    background-color:#72bbb0;
+    background-color:#ffffff;
     display: inline-block;
+    align: center;
   }

@@ -47,7 +47,13 @@ session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         var_dump($_FILES);
         var_dump($_POST);
-        //Code pour le fichier
+        //Tentatives de créer des dossiers en fonction du user
+        /*
+        $target_dir = $_SESSION['ID_user']."_uploads";
+        if (!is_dir($target_dir)){
+            mkdir($target_dir);
+        }
+        */
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         //Petit test pour s'assurer qu'on créer le bon fichier
@@ -92,7 +98,7 @@ function poster() {
 
         //$insert="INSERT INTO publication(ID_author, date, time,/* visibility,*/ location, emotion, text, ID_media, nb_like)
         //VALUES ('" . $_SESSION['USER_ID'] . "','" . date('Y-m-d') . "','"  . date('h:i:sa') . "','"/* . $_POST['visibility'] . "','"*/ . $_POST['Lieu'] . "','" .
-        //$_POST['mood'] . "','" . $_POST['Description'] . "','" . $_POST['ID_media'] . "',0)";
+        //$_POST['mood'] . "','" . $description . "','" . $_POST['ID_media'] . "',0)";
 
         //$sql=  requete ici ;
     }

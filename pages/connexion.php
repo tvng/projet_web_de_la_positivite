@@ -27,11 +27,13 @@
     <body>
 
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #007179;">
+
+    <img src="../resources/logo.png" class="navbar-brand" width="30px">   
     <a class="navbar-brand" href="#">ECEperanto</a>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="form-inline">
-            <input type="text" name="email" class="form-control" placeholder="e-mail">
-            <input type="password" name="password"  class="form-control"placeholder="mot de passe" >
-            <input type="submit" value="Connection" class="btn">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="form-inline mx-auto">
+            <input type="text" name="email" class="form-control mr-sm-2" placeholder="e-mail">
+            <input type="password" name="password"  class="form-control mr-sm-2" placeholder="mot de passe" >
+            <input type="submit" value="Connection" name="Connection" class="btn mr-sm-2">
         </form>
 
   
@@ -91,8 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Connection']))
             echo "pseu : " .$_SESSION['pseudo'];
             echo "mail : " .$_SESSION['email'];
             */
-            header("http://localhost/projet_web_de_la_positivite/pages/home.php");
-            exit;
+            header("Location: home.php");
+            exit();
         }
         else
         {

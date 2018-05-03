@@ -75,7 +75,7 @@ session_start();
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-	
+
 }
 ?>
 
@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 <?php	
 		 while ($fl_data = $friendlist->fetch() )
 		{
-			echo '<div class="card text-center" style="width: 20vw;">';
+			echo '<div class="card mx-auto text-center" style="width: 20vw;">';
 			echo '<img src="' .$fl_data['profile_pic'] .'" class="card-img-top img-fluid">';
 			echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
 			<h3 class="card-title">'.$fl_data["name"].' '.$fl_data["first_name"].'</h3>

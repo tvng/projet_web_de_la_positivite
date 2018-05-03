@@ -3,6 +3,14 @@ body {
     background-color: #ececec !important;
 }
 
+.inscription{
+    background-color: #ffffff;
+
+    border-width:1px;
+    border-style:solid;
+    border-color:#d6d6d6;
+}
+
 .post_style {
    background-color: #ffffff;
    border-width:1px;

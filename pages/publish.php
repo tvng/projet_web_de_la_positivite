@@ -9,18 +9,18 @@ session_start();
         <input type="file" name="fileToUpload" id="fileToUpload">
     </div>
     <div class="row">
-    <textarea id="desc" class="form-control" placeholder="Description" required></textarea>
+    <textarea id="desc" name="Description" class="form-control" placeholder="Description" required></textarea>
     </div>
     <!-- emoji -->
     <div class="row">
-        <select id="mood" class="custom-select col-sm-3">
+        <select id="mood" name="Emotion" class="custom-select col-sm-3">
         <option selected>Mood</option>
         <option value="1">:)</option>
         <option value="2">:(</option>
         <option value="3">!!!!!!!!!!!</option>
         </select>
 
-        <input id="place" type="text" class="form-control col-sm-3" placeholder="Lieu">
+        <input id="place" name="Lieu" type="text" class="form-control col-sm-3" placeholder="Lieu">
     
     </div>
     <!--
@@ -43,8 +43,24 @@ session_start();
 
 <?php
 
-    // Check if image file is a actual image or fake image
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['poster'])){
+        poster();
+      }
+
+
+function poster() {
+    echo("POST DEBUG -----------------");
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+    }
+    catch (Exception $e)
+    {
+       die('Erreur : ' . $e->getMessage());
+    }
+
+
+    // On verifie que le champs "Description" est rempli, c'est le seul qui est nécessaire
+    if (isset($_POST["Description"])){
         var_dump($_FILES);
         var_dump($_POST);
         //Tentatives de créer des dossiers en fonction du user
@@ -72,33 +88,9 @@ session_start();
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         }
-    }
-    else{
-        echo "Le submit passe pas";
-    }
-
-    if (isset($_POST['poster'])){
-        poster();
-      }
-
-
-function poster() {
-    echo("POST DEBUG -----------------");
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
-    }
-    catch (Exception $e)
-    {
-       die('Erreur : ' . $e->getMessage());
-    }
-
-    // On verifie que "description" est rempli, c'est le seul qui est nécessaire
-    if (isset($_POST["desc"]) ){
-        $description=$_POST["desc"];
-
-        //$insert="INSERT INTO publication(ID_author, date, time,/* visibility,*/ location, emotion, text, ID_media, nb_like)
-        //VALUES ('" . $_SESSION['USER_ID'] . "','" . date('Y-m-d') . "','"  . date('h:i:sa') . "','"/* . $_POST['visibility'] . "','"*/ . $_POST['Lieu'] . "','" .
-        //$_POST['mood'] . "','" . $description . "','" . $_POST['ID_media'] . "',0)";
+        $insert="INSERT INTO publication(ID_author, date, time,/* visibility,*/ location, emotion, text, media_link)
+        VALUES ('" . 10 . "','" . date('Y-m-d') . "','"  . date('h:i:sa') . "','"/* . $_POST['visibility'] . "','"*/ . $_POST['Lieu'] . "','" .
+        $_POST['Emotion'] . "','" . $_POST['Description'] . "','" . $target_file . "')";
 
         //$sql=  requete ici ;
     }

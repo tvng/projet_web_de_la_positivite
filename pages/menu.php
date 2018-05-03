@@ -1,5 +1,6 @@
 <?
-session_start();
+//Je crois que la présence de ce session_start affiche la grosse erreur puisque ce fichier est include là où la session est déjà start
+//session_start();
 ?>
 
 <!-- HTML DU MENU  

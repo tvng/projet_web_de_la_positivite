@@ -19,5 +19,6 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
         ?>
     </div>
         <?php echo "".$data["text"]."<br>"; ?>
-
+    <!--
     <img src="<?php echo $data['media_link']?>" height=300px width="400px">
+    -->

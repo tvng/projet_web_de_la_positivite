@@ -29,8 +29,7 @@ session_start();
 <body>
 <header>
   <!-- MENU -->
-  <div><?php include ("menu.php"); ?>
-   </div>
+  <div><?php include ("menu.php"); ?></div>
 
 </header>
 <!-- AU MILIEU -->

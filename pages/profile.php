@@ -119,14 +119,14 @@ ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 			"UNION SELECT ID_user2 as UserFROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
 
 		
-		$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n,
+		$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n, u1.profile_pic,
 		publication.date, publication.time, publication.text, publication.location, publication.emotion
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
 		WHERE ID_user=".$_SESSION['ID_user']);
 		while ($data = $posts->fetch())
 		{
-			echo '<div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2">';
+			echo '<div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2 pl-4">';
 			include ("post.php");
 			echo "</div></div><br />";
 		}

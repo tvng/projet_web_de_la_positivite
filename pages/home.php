@@ -57,15 +57,16 @@ session_start();
               die('Erreur : ' . $e->getMessage());
           }
           
-          $posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n,
+
+          $posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n, u1.profile_pic,
           publication.date, publication.time, publication.text, publication.location, publication.emotion
           FROM publication
           INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-          WHERE u1.ID_user =10");
+          WHERE u1.ID_user =".$_SESSION['ID_user']);
 
           while ($data = $posts->fetch())
           {
-            echo '<div class="col-lg-12 post_style rounded p-2">';
+            echo '<div class="col-lg-12 post_style rounded p-2 pl-4">';
             include ("post.php");
             echo "</div><br />";
           }

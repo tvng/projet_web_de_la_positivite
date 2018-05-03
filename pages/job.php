@@ -29,11 +29,28 @@ session_start();
 <body>
 <header>
   <!-- MENU -->
-  <?php include ("menu.php"); ?>
-   
 
 </header>
 - afficher les emplois dispos et la possibilite de postuler
+<?php include ("menu.php");
+session_start();
+
+$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$instruct = "SELECT COUNT(ID_job) FROM job";
+$number = $bdd->exec($instruct);
+
+for($id_job = "1"; $id_job <= $number ; $id_job++)
+{
+    $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
+    $sql->execute(array($id_job));
+    $info = $sql->fetch();
+    echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
+    echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
+    echo "Présentation : " . $info['text'] . ".\n";
+}
+
+?>
 
 <footer></footer>
 </body>

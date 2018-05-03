@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     //on verifie que le mail est correct
     $instruct = $bdd->prepare('SELECT password FROM user WHERE email = ?');
     $colog = $instruct->execute(array($email));//Ca devrait pas juste être $email?
-    $info = array();
+    $info = array();//il ne m'a pas l'air nécessaire donc je pense qu'on peut le virer mais au cas ou je le laisse
     $coreussi = false;
 
     if($colog != null)

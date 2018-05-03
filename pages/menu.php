@@ -11,6 +11,8 @@
 -->
 
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #007179;">
+<img src="../resources/logo.png" class="navbar-brand" width="20px">   
+    <a class="navbar-brand" href="#">ECEperanto</a>
     <div class="container justify-content-end">
         <ul class="nav">
             <li class="nav-item">

@@ -33,35 +33,49 @@ session_start();
 </header>
 - afficher les emplois dispos et la possibilite de postuler
 <?php include ("menu.php");
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
+    try
+    {
+        $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch (Exception $e)
+    {
+        die('Erreur : ' . $e->getMessage());
+    }
 
-$instruct = "SELECT COUNT(ID_job) FROM job";
-$number = $bdd->exec($instruct);
-$taken = array();
-$not_taken = array();
+    $sql = "SELECT * FROM job";
+    $jobs = $bdd->query($sql);
 
-/*Alors mon idée c'etait de d'abord séparer les jobs pending de ceux qui ne le sont pas
-ce que j'ai fait normalement il n'y a pas de problème la dessus
-Le problème arrive la, puisque la bdd bouge en fonction des offres il faut réussir a faire un nb de boutons variables
-qui envoie de trucs a la bdd
-Donc le problème c'est
-Nombre de boutons = valeur en php
-Boutons = html
-Instructions = php
-Bonne chance a celui qui me lira
-*/
+    //Pour compter le nombre de jobs...
+    $test = "SELECT count(ID_job) FROM job";
+    $test = $bdd->query($test);
+    $number_of_jobs = $test->fetch();
+    echo $number_of_jobs['count(ID_job)'];
 
-for($id_job = 1; $id_job <= $number ; $id_job++)
-{
-    $applied = $bdd->prepare('SELECT ID_job FROM job_taken WHERE ID_job = ? AND ID_user = ?')
+    /*Alors mon idée c'etait de d'abord séparer les jobs pending de ceux qui ne le sont pas
+    ce que j'ai fait normalement il n'y a pas de problème la dessus
+    Le problème arrive la, puisque la bdd bouge en fonction des offres il faut réussir a faire un nb de boutons variables
+    qui envoie de trucs a la bdd
+    Donc le problème c'est
+    Nombre de boutons = valeur en php
+    Boutons = html
+    Instructions = php
+    Bonne chance a celui qui me lira
+    */
+
+    $applied_to_job=true;
+    while ($data = $jobs->fetch())
+    {
+        include ("job_box.php");
+    }
+
+    $jobs->closeCursor();
+    /*
+    for($id_job = 1; $id_job <= $number_of_jobs ; $id_job++)
+    {
+        echo "La boucle se lance au moins";
+        echo $id_job;
+        $applied = $bdd->prepare('SELECT ID_job FROM apply_to WHERE ID_job = ? AND ID_user = ?');
         $applied->execute(array($id_job, $SESSION["ID_user"]));
         $empty = $applied->fetch();
         if($empty = null)
@@ -76,26 +90,28 @@ for($id_job = 1; $id_job <= $number ; $id_job++)
         }
     }
 
-//on peut découper mieux que ça mais pour l'instant ça devrait donner
-foreach($taken as $id_taken)
-{
-    $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
-    $sql->execute(array($id_taken));
-    $info = $sql->fetch();
-    echo "Vous attendez la réponse pour l'offre de " . $info['company'] . ".\n";
-    echo "<input type=\"submit\" value=\"Annuler\" name=\"submit\" />";
-}
-echo "\n \n";
-foreach($not_taken as $id_not_taken)
-{
-    $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
-    $sql->execute(array($id_not_taken));
-    $info = $sql->fetch();
-    echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
-    echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
-    echo "Présentation : " . $info['text'] . ".\n";
-    echo "<input type=\"submit\" value=\"Participer\" name=\"submit\" />";
-}
+    //on peut découper mieux que ça mais pour l'instant ça devrait donner
+    foreach($taken as $id_taken)
+    {
+        $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
+        $sql->execute(array($id_taken));
+        $info = $sql->fetch();
+        echo "Vous attendez la réponse pour l'offre de " . $info['company'] . ".\n";
+        echo "<input type=\"submit\" value=\"Annuler\" name=\"submit\" />";
+    }
+
+    echo "<br><br>";
+    foreach($not_taken as $id_not_taken)
+    {
+        $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
+        $sql->execute(array($id_not_taken));
+        $info = $sql->fetch();
+        echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
+        echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
+        echo "Présentation : " . $info['text'] . ".\n";
+        echo "<input type=\"submit\" value=\"Participer\" name=\"submit\" />";
+    }
+    */
 ?>
 
 

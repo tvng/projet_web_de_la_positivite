@@ -48,6 +48,17 @@ $number = $bdd->exec($instruct);
 $taken = array();
 $not_taken = array();
 
+/*Alors mon idée c'etait de d'abord séparer les jobs pending de ceux qui ne le sont pas
+ce que j'ai fait normalement il n'y a pas de problème la dessus
+Le problème arrive la, puisque la bdd bouge en fonction des offres il faut réussir a faire un nb de boutons variables
+qui envoie de trucs a la bdd
+Donc le problème c'est
+Nombre de boutons = valeur en php
+Boutons = html
+Instructions = php
+Bonne chance a celui qui me lira
+*/
+
 for($id_job = 1; $id_job <= $number ; $id_job++)
 {
     $applied = $bdd->prepare('SELECT ID_job FROM job_taken WHERE ID_job = ? AND ID_user = ?')

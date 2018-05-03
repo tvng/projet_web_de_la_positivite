@@ -5,7 +5,6 @@ session_start();
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
 <div class="container-fluid">
     <div class="row">
-        photo video poste
         <input type="file" name="fileToUpload" id="fileToUpload">
     </div>
     <div class="row">

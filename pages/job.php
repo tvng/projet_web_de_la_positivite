@@ -33,8 +33,6 @@ session_start();
 </header>
 - afficher les emplois dispos et la possibilite de postuler
 <?php include ("menu.php");
-session_start();
-
 try
 {
     $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
@@ -74,6 +72,7 @@ foreach($taken as $id_taken)
     $sql->execute(array($id_taken));
     $info = $sql->fetch();
     echo "Vous attendez la réponse pour l'offre de " . $info['company'] . ".\n";
+    echo "<input type=\"submit\" value=\"Annuler\" name=\"submit\" />";
 }
 echo "\n \n";
 foreach($not_taken as $id_not_taken)
@@ -84,8 +83,8 @@ foreach($not_taken as $id_not_taken)
     echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
     echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
     echo "Présentation : " . $info['text'] . ".\n";
+    echo "<input type=\"submit\" value=\"Participer\" name=\"submit\" />";
 }
-
 ?>
 
 

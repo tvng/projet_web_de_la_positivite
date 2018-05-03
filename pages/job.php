@@ -32,27 +32,49 @@ session_start();
 
 </header>
 - afficher les emplois dispos et la possibilite de postuler
-<?php include ("menu.php");
+<?php include ("menu.php"); ?>
+
+<footer></footer>
+</body>
+
+</html>
+
+
+<?php
+
 session_start();
 
 $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $instruct = "SELECT COUNT(ID_job) FROM job";
 $number = $bdd->exec($instruct);
+$taken = array();
+$not_taken = array();
 
-for($id_job = "1"; $id_job <= $number ; $id_job++)
+for($id_job = 1; $id_job <= $number ; $id_job++)
 {
-    $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
-    $sql->execute(array($id_job));
-    $info = $sql->fetch();
-    echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
-    echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
-    echo "Présentation : " . $info['text'] . ".\n";
+    $applied = $bdd->prepare('SELECT ID_job FROM job_taken WHERE ID_job = ? AND ID_user = ?')
+    $applied->execute(array($id_job, $SESSION["ID_user"]));
+    $empty = $applied->fetch();
+    if($empty = null)
+    {
+        //ca va en bas dans la liste de job pour lequelle on a pas applied
+        $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
+        $sql->execute(array($id_job));
+        $info = $sql->fetch();
+        array_push($not_taken, $id_job);
+        echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
+        echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
+        echo "Présentation : " . $info['text'] . ".\n";
+    }
+    else
+    {
+        //ca va en haut dans la liste des pending jobs
+        $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
+        $sql->execute(array($id_job));
+        $info = $sql->fetch();
+        array_push($taken, $id_job);
+        echo "Vous attendez la réponse pour l'offre de " . $info['company'] . ".\n";
+    }
 }
-
 ?>
-
-<footer></footer>
-</body>
-
-</html>

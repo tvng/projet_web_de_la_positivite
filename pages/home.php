@@ -56,13 +56,26 @@ session_start();
           {
               die('Erreur : ' . $e->getMessage());
           }
-          
+         
 
           $posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n, u1.profile_pic,
-          publication.date, publication.time, publication.text, publication.location, publication.emotion
+           publication.media_link, publication.date, publication.time, publication.text, publication.location, publication.emotion
           FROM publication
           INNER JOIN user u1 ON u1.ID_user = publication.ID_author
           WHERE u1.ID_user =".$_SESSION['ID_user']);
+
+/*
+
+          $posts= $bdd->query("
+            SELECT publication.ID_author, publication.date, publication.time, publication.visibility, publication.location, publication.emotion, publication.text, publication.ID_media, publication.nb_like 
+            FROM publication INNER JOIN post ON post.ID_post = publication.ID_post 
+            INNER JOIN user ON user.ID_user = post.ID_user 
+            WHERE user.ID_user = ANY (" ."SELECT ID_user1 as User 
+            FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
+            UNION 
+            SELECT ID_user2 as User 
+            FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] . ")
+          ");*/
 
           while ($data = $posts->fetch())
           {

@@ -120,7 +120,7 @@ ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 
 		
 		$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n, u1.profile_pic,
-		publication.date, publication.time, publication.text, publication.location, publication.emotion
+		publication.date, publication.time, publication.text, publication.location, publication.emotion, publication.media_link
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
 		WHERE ID_user=".$_SESSION['ID_user']);

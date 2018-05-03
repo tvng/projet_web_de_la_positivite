@@ -21,5 +21,9 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
         ?>
     </div>
         <?php echo "".$data["text"]."<br>";
-        //echo '<img src="'.$data['media_link'] .'height=300px width="400px">'
+        if (empty($data["media_link"]) === false) {
+            echo '<img src="'.$data['media_link'] .'" style="max-width : 30vw; max-heigh: 200px;">';
+        }
         ?>
+
+ 

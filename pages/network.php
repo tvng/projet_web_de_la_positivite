@@ -33,6 +33,13 @@ session_start();
    
 
 </header>
+
+
+<br/>
+- rechercher des gens et proposer de les ajouter en ami
+<br />
+- proposer de supprimer des amis  (additionnel)
+
 <?php
     try {
 		$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
@@ -41,21 +48,35 @@ session_start();
 	{
 		die('Erreur : ' . $e->getMessage());
     } 
-/*
-    $friendlist = $bdd->query("SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
-    "UNION SELECT ID_user2 as User FROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'] );
-	while ($fl_data = $friendlist->fetch() )
-	{echo $fl_data['User'];   
-    }
-*/
+
+    $friendlist = $bdd->query(
+		"SELECT user.name, user.first_name, profile_pic FROM user where ID_user = 
+		ANY (" ."SELECT ID_user1 as User 
+		FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
+		UNION 
+		SELECT ID_user2 as User 
+		FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] .")"
+		 );
 ?>
 
-<h3>Mon reseau</h3>
+<div class="container-fluid">
+	<h3>Mon reseau</h3>
+<div class="card-columns">
+<?php	
+		 while ($fl_data = $friendlist->fetch() )
+		{
+			echo '<div class="card text-center" style="width: 20vw;">';
+			echo '<img src="' .$fl_data['profile_pic'] .'" class="card-img-top img-fluid">';
+			echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
+			<h3 class="card-title">'.$fl_data["name"].' '.$fl_data["first_name"].'</h3>
+			<a href="#" class="btn btn-success">Voir le profil</a>
+			<a href="#" class="btn btn-outline-success">Supprimer des amis</a>
+		</div>';
+			echo ""."</div>"; 
+		}
 
-- afficher les amis  (nom et photo) <br/>
-- rechercher des gens et proposer de les ajouter en ami
-<br />
-- proposer de supprimer des amis  (additionnel)
+?></div>
+</div>
 
 <footer></footer>
 </body>

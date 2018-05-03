@@ -70,3 +70,9 @@ body {
     
     background-color:#72bbb0;
 }
+
+
+.card-columns {
+    background-color:#72bbb0;
+    display: inline-block;
+  }

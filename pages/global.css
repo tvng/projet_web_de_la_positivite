@@ -17,6 +17,22 @@ body {
    border-style:solid;
    border-color:#d6d6d6;
 }
+.pp_post {
+  
+    max-width: 70px; 
+    max-height: 70px;
+    overflow: hidden;
+  display: flex;
+  justify-content: center;
+  color:#007179;
+}
+
+.pp_post img {
+    object-position: center; /* Center the image within the element */
+    height: auto; 
+    overflow-x: hidden;
+  }
+
 .comment_style{
     background-color: #ececec;
     border-width:1px;
@@ -49,6 +65,7 @@ body {
 .profile_pic {
     padding-left: 10px; 
     width: 8vw;
+    overflow: hidden;
 }
 
 .profile_top{

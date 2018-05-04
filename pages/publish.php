@@ -1,4 +1,3 @@
-
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
 <div class="container-fluid">
     <div class="row pb-1">
@@ -52,7 +51,6 @@ function poster() {
        die('Erreur : ' . $e->getMessage());
     }
 
-
     // On verifie que le champs "Description" est rempli, c'est le seul qui est nécessaire
     if (isset($_POST["Description"])){
         //Test pour vérifier que le form fonctionnne
@@ -65,16 +63,17 @@ function poster() {
            $target_file=" ";
         }
         else {
-            echo "no";
-        
-            $target_dir = $_SESSION['ID_user']."_uploads/";
-            if (!is_dir($target_dir)){
+            $target_dir = "user".$_SESSION['ID_user'];
+            if (!is_dir($target_dir))
                 mkdir($target_dir);
-            }
+
+            $target_dir = $target_dir."/posts/";
+            if (!is_dir($target_dir))
+                mkdir($target_dir);
 
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             //Petit test pour s'assurer qu'on créer le bon fichier
-            //echo $target_file."<br>";
+            echo $target_file."<br>";
 
             //Tests d'intégrité du fichier (taille, type, non doublon etc)
             $uploadOk = 1;

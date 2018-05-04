@@ -32,10 +32,141 @@ session_start();
   <?php include ("menu.php"); ?>
 </header>
 <h3>Settings</h3>
-<br/ >- Modifier profile_pic 
-<br />- modifier header_pic 
-<br />
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
+    Enregistrer une photo de profile : <input type="file" name="profile_pic">
+    <input type="submit" name="submit" value="Confirmer votre choix">
+</form>
+
+<form action="" method="post" enctype="multipart/form-data">
+    Enregistrer une photo de fond : <input type="file" name="header_pic">
+    <input type="submit" name="submit" value="Confirmer votre choix">
+</form>
+
 <footer></footer>
 </body>
 
 </html>
+
+<?php
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        //Test pour vérifier que le form fonctionnne
+        /*
+        var_dump($_FILES);
+        var_dump($_POST);
+        */
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+        }
+        catch (Exception $e)
+        {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        if (isset($_FILES["profile_pic"])){
+
+            if (empty($_FILES["profile_pic"]["tmp_name"])){
+                //no file
+                $target_file=" ";
+            }
+            else {
+                $target_dir = "user".$_SESSION['ID_user'];
+                if (!is_dir($target_dir))
+                    mkdir($target_dir);
+
+                $target_dir = $target_dir."/profile/";
+                if (!is_dir($target_dir))
+                    mkdir($target_dir);
+
+                $target_file = $target_dir . basename($_FILES["profile_pic"]["name"]);
+                //Petit test pour s'assurer qu'on créer le bon fichier
+                echo $target_file."<br>";
+
+                //Tests d'intégrité du fichier (taille, type, non doublon etc)
+                $uploadOk = 1;
+                $check = getimagesize($_FILES["profile_pic"]["tmp_name"]);
+                if($check !== false) {
+                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif" ) {
+                        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                        $uploadOk = 0;
+                    }
+                    if (file_exists($target_file)) {
+                        echo "Sorry, file already exists.";
+                        $uploadOk = 0;
+                    }
+                } else {
+                    echo "File is not an image.<br>";
+                    $uploadOk = 0;
+                }
+
+                if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file) && $uploadOk!== 0) {
+                    echo "The file ". basename( $_FILES["profile_pic"]["name"]). " has been uploaded.";
+                }
+            }
+
+            $sql="UPDATE user SET profile_pic = '".$target_file. "' WHERE ID_user = " . $_SESSION['ID_user'];
+            echo $sql;
+            $bdd->exec($sql);
+        }
+        else{
+            echo "Champs profile vide";
+        }
+
+        if(isset($_FILES['header_pic'])){
+            if (empty($_FILES["header_pic"]["tmp_name"])){
+                //no file
+                $target_file=" ";
+            }
+            else {
+                $target_dir = "user".$_SESSION['ID_user'];
+                if (!is_dir($target_dir)){
+                    mkdir($target_dir);
+                    $target_dir = $target_dir."/profile/";
+                    if (!is_dir($target_dir))
+                        mkdir($target_dir);
+                }
+                else{
+                    $target_dir = $target_dir."/profile/";
+                }
+
+                $target_file = $target_dir . basename($_FILES["header_pic"]["name"]);
+                //Petit test pour s'assurer qu'on créer le bon fichier
+                echo $target_file."<br>";
+
+                //Tests d'intégrité du fichier (taille, type, non doublon etc)
+                $uploadOk = 1;
+                $check = getimagesize($_FILES["header_pic"]["tmp_name"]);
+                if($check !== false) {
+                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif" ) {
+                        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                        $uploadOk = 0;
+                    }
+                    if (file_exists($target_file)) {
+                        echo "Sorry, file already exists.";
+                        $uploadOk = 0;
+                    }
+                } else {
+                    echo "File is not an image.<br>";
+                    $uploadOk = 0;
+                }
+
+                if (move_uploaded_file($_FILES["header_pic"]["tmp_name"], $target_file) && $uploadOk!== 0) {
+                    echo "The file ". basename( $_FILES["header_pic"]["name"]). " has been uploaded.";
+                }
+            }
+
+            $sql="UPDATE user SET header_pic = '".$target_file. "' WHERE ID_user = " . $_SESSION['ID_user'];
+            echo $sql;
+            $bdd->exec($sql);
+        }
+        else{
+            echo "Champs header vide";
+        }
+    }
+
+
+?>

@@ -33,12 +33,25 @@ body {
     overflow-x: hidden;
   }
 
-.comment_style{
-    background-color: #ececec;
+.comment_box{
+    background-color: #ffffff;
     border-width:1px;
     border-style:solid;
-    border-color:#d6d6d6;
+    border-color:#ececec;
 }
+
+.comment_style{
+
+}
+
+.pp_comment {
+    max-width: 40px; 
+    max-height: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
 
 #event_box{
     background-color: #ffffff;

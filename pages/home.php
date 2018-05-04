@@ -68,7 +68,8 @@ session_start();
 */
 
 
-          $posts= $bdd->query("SELECT user.profile_pic, user.name AS author_n, user.first_name AS author_f_n, publication.date, publication.time, publication.visibility, publication.location, publication.emotion, publication.text, publication.media_link, publication.nb_like 
+          $posts= $bdd->query("SELECT user.profile_pic, user.name AS author_n, user.first_name AS author_f_n, 
+          publication.ID_post, publication.date, publication.time, publication.visibility, publication.location, publication.emotion, publication.text, publication.media_link, publication.nb_like 
           FROM publication INNER JOIN user ON user.ID_user = publication.ID_author
           WHERE user.ID_user = ANY (" ."SELECT ID_user1 as User 
           FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 

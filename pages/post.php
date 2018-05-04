@@ -34,8 +34,48 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
         }
         ?>
 </div>
-<div class="btn-group btn-group-justified"  style="width:100%;" role="group">
-                <a href="#" class="btn btn-primary" role="button">LIKE</a>
-                <a href="#" class="btn btn-primary" role="button">COMMENT</a>
-                <a href="#" class="btn btn-primary" role="button">SHARE</a> 
-              </div>
+<div class="row">
+    <div class="col col-md-auto"><form action="" method="post">
+    <?php
+    echo '<input class="btn" type="submit" value="'.$data['nb_like'].' LIKE" name="like_'.$data['ID_post'].'">';
+    echo '<a class="btn" data-toggle="collapse" href="#box_'.$data['ID_post'].'" role="button" aria-expanded="false">COMMENT</a>';
+    echo '<input class="btn" type="submit" value="SHARE" name="share_'.$data['ID_post'].'">';
+    ?>
+    </form></div>
+
+</div>
+
+<div class="collapse" id="box_<?php echo $data['ID_post']; ?>">
+     <div class="comment_box">
+        - commenter
+
+        <?php
+        $sqlco="SELECT comment.ID_author, comment.comment_date, comment.comment_time, comment.comment_text,
+        user.profile_pic,user.first_name,user.name
+        FROM comment 
+        INNER JOIN user ON comment.ID_author = user.ID_user
+        WHERE comment.ID_post= " . $data['ID_post']."
+        ORDER BY comment.comment_date DESC, comment.comment_time DESC";
+        $com= $bdd->query($sqlco);
+        while ($datac = $com->fetch())
+        {
+            include('comments.php');
+        } 
+        ?>
+
+    </div>
+</div>
+
+<?php
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like_'.$data['ID_post']])){
+        //Faire en sorte que le gars postule avec sql
+        //Du coup est ce qu'on fait un div légèrement différent pour les jobs auquel le gars a déjà postulé?
+       // $sql="INSERT INTO apply_to VALUES('" . $_SESSION['ID_user'] . "','" . $data['ID_job']."')";
+        //$bdd->exec($sql);
+        echo "ciouciou";
+    }
+
+
+?>
+
+

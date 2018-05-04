@@ -44,6 +44,14 @@ session_start();
 </div>
 </div>
 
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    Organiser un événement :<br>
+    Description : <input type="text" name="text"><br>
+    Lieu : <input type="text" name="location"><br>
+    Date : <input type="date" name="date"><br>
+    Heure : <input type="time" name="time"><br>
+    <input type="submit" value="Valider" name="submit"><br>
+</form>
 
 <footer></footer>
 </body>
@@ -90,4 +98,12 @@ session_start();
         include ("event_box.php");
     }
     $events_to_take->closeCursor();
+
+    //Ajout d'un événement
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $sql="INSERT INTO event (author, date_post, time_post, date, time, location, text) VALUES('".$_SESSION['ID_user']."','".date('Y-m-d')."','".date('h:i:s')
+            ."','".$_POST['date'] . "','" . $_POST['time'] . "','". $_POST['location'] . "','". $_POST['text'] . "')";
+        echo $sql;
+        $bdd->exec($sql);
+    }
 ?>

@@ -65,7 +65,7 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
         while ($datac = $com->fetch())
         {
             include('comments.php');
-        } 
+        }
         ?>
 
     </div>
@@ -82,6 +82,3 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
 
 
 ?>
-
-
->>>>>>> 3d4588e536c2f33936c1c7826370c58c449dab4e

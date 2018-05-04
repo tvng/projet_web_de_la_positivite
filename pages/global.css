@@ -17,6 +17,12 @@ body {
    border-style:solid;
    border-color:#d6d6d6;
 }
+.comment_style{
+    background-color: #ececec;
+    border-width:1px;
+    border-style:solid;
+    border-color:#d6d6d6;
+}
 
 #event_box{
     background-color: #ffffff;
@@ -85,3 +91,4 @@ body {
     display: inline-block;
     align: center;
   }
+

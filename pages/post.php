@@ -1,8 +1,7 @@
 <!-- post 
 On fait un seul modèle qui sera appelé plusieurs fois -->
 
-
-<div class="post_style col-md-12 rounded p-3 mt-3">
+<div class="post_style rounded p-3 mt-3" >
     <div class="row">
         <div class="col col-md-auto">
             <?php
@@ -32,5 +31,4 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
             echo '<img src="'.$data['media_link'] .'" style="max-width : 30vw; max-heigh: 200px;">';
         }
         ?>
-
- </div>
+</div>

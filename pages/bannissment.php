@@ -30,33 +30,48 @@
     <img src="../resources/logo.png" class="navbar-brand" width="30px">
     <a class="navbar-brand" href="#">ECEperanto</a>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="form-inline mx-auto">
-        <select class="form-control" name="action">
-            <option value="ban">Bannissement</option>
-            <option value="inscrire">Inscription</option>
-        </select>
-        <input type="submit" value="Admin" name="Admin" class="btn mr-sm-2"
+        <input type="text" name="email" class="form-control mr-sm-2" placeholder="e-mail">
+        <input type="text" name="name"  class="form-control mr-sm-2" placeholder="nom" >
+        <input type="text" name="first_name"  class="form-control mr-sm-2" placeholder="prénom" >
+        <input type="submit" value="Bannissement" name="Bannissement" class="btn mr-sm-2"
     </form>
 </nav>
 </body>
 </html>
 
+
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Admin']))
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Bannissement']))
 {
-    if($_POST['action'] == "inscription")
+    $email = $_POST['email'];
+    $name = $_POST['name'];
+    $first_name = $_POST['first_name'];
+    //echo $email.$name.$first_name;
+
+    try
     {
-        //aller vers l'inscription
-        header("localhost/projet_web_de_la_positivite/pages/inscription.php");
-        exit;
+        $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
     }
-    if($_POST['action'] == "ban")
+    catch (Exception $e)
     {
-        //aller vers le bannissement
-        header("localhost/projet_web_de_la_positivite/pages/bannissement.php");
-        exit;
+        die('Erreur : ' . $e->getMessage());
+    }
+
+
+    $instruct = $bdd->prepare('SELECT ID_user FROM user WHERE email = ?');
+    $ban= $instruct->execute(array($email));
+
+    if($ban != null)
+    {
+        $data = $instruct->fetch();
+        $destroy = $bdd->prepare('DELETE FROM user WHERE ID_user = ?');
+        $destroy->execute($data);
+    }
+    else
+    {
+        echo "La personne que vous voulez bannir n'existe pas.";
     }
 }
 ?>
-

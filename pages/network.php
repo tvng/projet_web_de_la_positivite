@@ -75,8 +75,14 @@ session_start();
 		else { 
 			$sl = $bdd->query(" SELECT ID_user, first_name, user.name, user.profile_pic
 			FROM user
-			WHERE first_name
-			LIKE '".$_GET['chercher_ami']."%' OR user.name LIKE '".$_GET['chercher_ami']."%' ");
+			WHERE 
+			(first_name LIKE '".$_GET['chercher_ami']."%' OR user.name LIKE '".$_GET['chercher_ami']."%' )
+			AND ID_user <> ALL (" ."SELECT ID_user1 as User 
+			FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
+			UNION 
+			SELECT ID_user2 as User 
+			FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] .")
+			");
 		
 			while ($sl_data = $sl->fetch() )
 			{
@@ -84,17 +90,28 @@ session_start();
 				echo '<img src="' .$sl_data['profile_pic'] .'" class="card-img-top img-fluid">';
 				echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
 				<h3 class="card-title">'.$sl_data["name"].' '.$sl_data["first_name"].'</h3>
-				<a href="#" class="btn btn-success">Voir le profil</a>
-				<a href="#" class="btn btn-outline-success">Ajouter en ami</a>
+			
+				<input name="pro_'.$sl_data['ID_user'].'" class="btn btn-success" value="Voir le profil" onclick="profil();">
+				
+				<input name="del_'.$sl_data['ID_user'].'" class="btn btn-outline-success" value="Ajouter en ami" onclick="delete();">
+			
 				</div>';
 				echo ""."</div>"; 
 			}
 			
 		}
+
 	}
 	?>
 	</div>
 </div>
+<?php
+	function delete()
+	{
+		alert("Hello world!");
+	}
+?>
+
 
 
 
@@ -116,7 +133,8 @@ session_start();
 		FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
 		UNION 
 		SELECT ID_user2 as User 
-		FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] .")"
+		FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] .")
+		"
 		 );
 
 		 while ($fl_data = $friendlist->fetch() )

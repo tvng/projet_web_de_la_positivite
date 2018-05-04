@@ -43,75 +43,35 @@ session_start();
         die('Erreur : ' . $e->getMessage());
     }
 
-    $sql = "SELECT * FROM job";
-    $jobs = $bdd->query($sql);
-
-    //Pour compter le nombre de jobs...
+    /*
+    //Pour compter le nombre de jobs si jamais
     $test = "SELECT count(ID_job) FROM job";
     $test = $bdd->query($test);
     $number_of_jobs = $test->fetch();
     echo $number_of_jobs['count(ID_job)'];
-
-    /*Alors mon idée c'etait de d'abord séparer les jobs pending de ceux qui ne le sont pas
-    ce que j'ai fait normalement il n'y a pas de problème la dessus
-    Le problème arrive la, puisque la bdd bouge en fonction des offres il faut réussir a faire un nb de boutons variables
-    qui envoie de trucs a la bdd
-    Donc le problème c'est
-    Nombre de boutons = valeur en php
-    Boutons = html
-    Instructions = php
-    Bonne chance a celui qui me lira
     */
 
+    $sql = "SELECT DISTINCT job.ID_job, author, company, date_post, time_post, text, name, first_name
+    FROM job INNER JOIN user ON job.author = user.ID_user INNER JOIN apply_to ON job.ID_job = apply_to.ID_job WHERE apply_to.ID_user = ".$_SESSION['ID_user'];
+    $jobs_applied = $bdd->query($sql);
+
     $applied_to_job=true;
-    while ($data = $jobs->fetch())
+    while ($data = $jobs_applied->fetch())
     {
         include ("job_box.php");
     }
+    $jobs_applied->closeCursor();
 
-    $jobs->closeCursor();
-    /*
-    for($id_job = 1; $id_job <= $number_of_jobs ; $id_job++)
-    {
-        echo "La boucle se lance au moins";
-        echo $id_job;
-        $applied = $bdd->prepare('SELECT ID_job FROM apply_to WHERE ID_job = ? AND ID_user = ?');
-        $applied->execute(array($id_job, $SESSION["ID_user"]));
-        $empty = $applied->fetch();
-        if($empty = null)
-        {
-            //ca va en bas dans la liste de job pour lequelle on a pas applied
-            array_push($not_taken, $id_job);
-        }
-        else
-        {
-            //ca va en haut dans la liste des pending jobs
-            array_push($taken, $id_job);
-        }
-    }
+    $sql="SELECT * FROM job INNER JOIN user ON job.author = user.ID_user WHERE ID_job <> ANY(SELECT DISTINCT job.ID_job 
+    FROM job INNER JOIN apply_to ON job.ID_job = apply_to.ID_job WHERE apply_to.ID_user = ".$_SESSION['ID_user'].")";
+    $jobs_to_take = $bdd->query($sql);
 
-    //on peut découper mieux que ça mais pour l'instant ça devrait donner
-    foreach($taken as $id_taken)
+    $applied_to_job=false;
+    while ($data = $jobs_to_take->fetch())
     {
-        $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
-        $sql->execute(array($id_taken));
-        $info = $sql->fetch();
-        echo "Vous attendez la réponse pour l'offre de " . $info['company'] . ".\n";
-        echo "<input type=\"submit\" value=\"Annuler\" name=\"submit\" />";
+        include ("job_box.php");
     }
-
-    echo "<br><br>";
-    foreach($not_taken as $id_not_taken)
-    {
-        $sql = $bdd->prepare('SELECT * FROM job WHERE ID_job = ?');
-        $sql->execute(array($id_not_taken));
-        $info = $sql->fetch();
-        echo "Cette offre d'emploi vous est offerte par " . $info['company'] . ".\n";
-        echo "Le " . $info['date_post'] . " à " . $info['time_post'] . ".\n";
-        echo "Présentation : " . $info['text'] . ".\n";
-        echo "<input type=\"submit\" value=\"Participer\" name=\"submit\" />";
-    }
-    */
+    $jobs_to_take->closeCursor();
 ?>
 
 

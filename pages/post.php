@@ -1,6 +1,16 @@
 <!-- post 
 On fait un seul modèle qui sera appelé plusieurs fois -->
 
+
+<!-- PHP POUR COMPTER LE NOMBRE DE LIKES -->
+<?php 
+
+    $nb_likes = $bdd->query("SELECT COUNT(ID_liker) AS count_likes FROM like_post WHERE ID_liked=".$data['ID_post']);
+    $nb_likes_data = $nb_likes->fetch();
+?>
+
+<!--  HTML -->
+
 <div class="post_style rounded p-3 mt-3" >
     <div class="row">
         <div class="col col-md-auto">
@@ -35,10 +45,37 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
         ?>
 </div>
 
+
+<!-- php des familles pour savoir si on a deja cliqué sur likeyyyyyyyyyy -->
+
+<?php 
+    $liked_sql = $bdd->query("SELECT ID_liker FROM like_post 
+    WHERE ID_liked='".$data["ID_post"]."' 
+    AND ID_liker='".$_SESSION["ID_user"]."' ");
+    $liked = $liked_sql->fetch();
+    
+    if (is_array($liked) )
+    {
+        $can_like=false;
+    } else 
+    {
+        $can_like=true;
+    }
+
+?>
+
+<!-- LES BOUTONS LIKE COMMENT SHARE -->
 <div class="row">
     <div class="col col-md-auto"><form action="" method="post">
     <?php
-    echo '<input class="btn" type="submit" value="'.$data['nb_like'].' LIKE" name="like_'.$data['ID_post'].'">';
+   if ($can_like === true )
+   {
+    echo '<input class="btn" type="submit" value="'. $nb_likes_data['count_likes'].' LIKE" name="like_'.$data['ID_post'].'">';
+   }
+   else {
+    echo '<input class="btn btn-success" type="submit" value="'. $nb_likes_data['count_likes'].' LIKE" name="like_'.$data['ID_post'].'">';
+   }
+  
     echo '<a class="btn" data-toggle="collapse" href="#box_'.$data['ID_post'].'" role="button" aria-expanded="false">COMMENT</a>';
     echo '<input class="btn" type="submit" value="SHARE" name="share_'.$data['ID_post'].'">';
     ?>
@@ -46,11 +83,26 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
 
 </div>
 
+<?php
+
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like_'.$data['ID_post']])){
+    if ($can_like===true){        
+        $sql_like="INSERT INTO like_post VALUES('" . $_SESSION['ID_user'] . "','" . $data['ID_post']."')";
+        $bdd->exec($sql_like);
+    }
+    else{
+        $sql_like="DELETE FROM like_post WHERE ID_liked='".$data["ID_post"]."' AND ID_liker='".$_SESSION["ID_user"]."' ";
+        $bdd->exec($sql_like);
+    }
+    
+}
+
+?>
+
+<!--  LA BOITE QUI S'AFFICHE QUAND ON CLIQUE SUR COMMENTAIRE -->
 <div class="collapse" id="box_<?php echo $data['ID_post']; ?>">
     <div class="comment_box">
-        - commenter
-        
-        
+        <!--  FORM POUR POSTER UN COMMENTAIRE -->
         <form class="form-inline " action="" method="post"> 
             <div class="form-group container-fluid">
                 <div class="col col-md-auto">
@@ -69,7 +121,7 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
         
     
         <?php
-        // SI ON A VALIDER LE POSTAGE DE COMMENTAIRE
+        // SI ON A VALIDE LE POSTAGE DE COMMENTAIRE
         if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment_'.$data['ID_post']])){
             $sql="INSERT INTO comment (ID_author, ID_post, comment_time, comment_date, comment_text)
             VALUES ('".$_SESSION['ID_user']."', '".$data['ID_post']."', '". date('h:i:s')."', '".date('Y-m-d')."', '".$_POST['comment_text']."' )";
@@ -94,14 +146,4 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
     </div>
 </div>
 
-<?php
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like_'.$data['ID_post']])){
-        //Faire en sorte que le gars postule avec sql
-        //Du coup est ce qu'on fait un div légèrement différent pour les jobs auquel le gars a déjà postulé?
-       // $sql="INSERT INTO apply_to VALUES('" . $_SESSION['ID_user'] . "','" . $data['ID_job']."')";
-        //$bdd->exec($sql);
-        echo "ciouciou";
-    }
 
-
-?>

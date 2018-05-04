@@ -68,15 +68,15 @@ session_start();
 */
 
 
-          $posts= $bdd->query("SELECT user.profile_pic, user.name AS author_n, user.first_name AS author_f_n, ID_author,
-         publication.date, time, visibility, location, emotion, text, media_link, nb_like 
-          FROM publication INNER JOIN user ON user.ID_user = publication.ID_author
-          WHERE user.ID_user = ANY (" ."SELECT ID_user1 as User 
-          FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
-          UNION 
-          SELECT ID_user2 as User 
-          FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] . ") AND visibility <> 'Myself only'
-      		ORDER BY publication.date DESC, publication.time DESC");
+                $posts= $bdd->query("SELECT user.profile_pic, user.name AS author_n, user.first_name AS author_f_n, ID_author,
+             publication.date, time, visibility, location, emotion, text, media_link, nb_like 
+              FROM publication INNER JOIN user ON user.ID_user = publication.ID_author
+              WHERE user.ID_user = ANY (" ."SELECT ID_user1 as User 
+              FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
+              UNION 
+              SELECT ID_user2 as User
+              FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] . ") AND visibility <> 'Myself only'
+                ORDER BY publication.date DESC, publication.time DESC");
 
 
           echo ' <div class="col-md-12">';

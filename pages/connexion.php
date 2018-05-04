@@ -27,7 +27,7 @@
     <body>
 
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #007179;">
-
+    <!-- Informations à entrer pour se connecter -->
     <img src="../resources/logo.png" class="navbar-brand" width="30px">   
     <a class="navbar-brand" href="#">ECEperanto</a>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="form-inline mx-auto">
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Connection']))
     $email = $_POST['email'];
     $mdp = $_POST['password'];
     echo $email.$mdp;
-
+    //ouverture de la bdd
     try
     {
         $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
@@ -61,21 +61,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Connection']))
         die('Erreur : ' . $e->getMessage());
     }
 
-    //on verifie que le mail est correct
+    //on récupère le mot de passe du mail donné
     $instruct = $bdd->prepare('SELECT password FROM user WHERE email = ?');
     $colog = $instruct->execute(array($email));
     $coreussi = false;
 
     if($colog != null)
     {
+        //on compare le mot de passe donné à celui du'on a récupéré
         $data = $instruct->fetch();
         $mdp_vrai=password_verify($mdp,$data['password']);
 
         if($mdp_vrai)
         {
+            //si le mot de passe est le bon l'utilisateur peut maintenant se connecter
             $coreussi = true;
             $coid = $bdd->prepare('SELECT * FROM user WHERE email = ?');
-            $coid->execute(array($email));//attention il faut bien blinder pour n'avoir que des emails différents dans la bdd, sinon ça plante
+            $coid->execute(array($email));
 
             $result = $coid->fetch();
             var_dump($_POST);
@@ -85,13 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Connection']))
             $_SESSION['first_name'] = $result['first_name'];
             $_SESSION['pseudo'] = $result['pseudo'];
             $_SESSION['email'] = $result['email'];
-            /*
-            echo "ID USER : " .$_SESSION['ID_user'];
-            echo "nom : " .$_SESSION['name'];
-            echo "fnom : " .$_SESSION['first_name'];
-            echo "pseu : " .$_SESSION['pseudo'];
-            echo "mail : " .$_SESSION['email'];
-            */
+
             header("Location: home.php");
             exit();
         }
@@ -106,8 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Connection']))
         echo "Identifiant inexistant."."/br";
     }
     $instruct->closeCursor();
-
-    //On a plus qu'a recuperer les info de l'id qu'on a pour afficher les infos en permanence
 }
 
 include("inscription.php");

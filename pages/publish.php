@@ -21,7 +21,7 @@
     </div>
    
     <div class="row">
-
+        <!-- Le visibilité correspond a qui peut voir le post -->
         <label>Visibilité :  </label>
         <select name="Visible" class="custom-select col-sm-2">
         <option selected value="Friends only">Mes amis</option>

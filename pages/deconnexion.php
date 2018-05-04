@@ -1,4 +1,5 @@
 <?
+//deconnexion de la session puis redirection vers la connexion
 session_start();
 session_unset();
 session_destroy();

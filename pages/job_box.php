@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_'.$data['ID_job'
     //Du coup est ce qu'on fait un div légèrement différent pour les jobs auquel le gars a déjà postulé?
     $sql="INSERT INTO apply_to VALUES('" . $_SESSION['ID_user'] . "','" . $data['ID_job']."')";
     $bdd->exec($sql);
-    echo "Vous avez postulé à cet emploi";
+    echo '<div class="alert alert-success" role="alert">Vous avez postulé à cet emploi</div>';
 }
 
 ?>

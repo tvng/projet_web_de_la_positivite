@@ -35,7 +35,7 @@ session_start();
 <div class="row justify-content-center ">
     <div class="col col-lg-7 "><div class="post_job p-3 rounded">
     <h3>Déposer une offre d'emploi:</h3>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
             <label> Description :  </label><input class="form-control" type="text" name="text" required><br>
             <label> Entreprise :  </label><input class="form-control" type="text" name="company" required><br>

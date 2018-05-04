@@ -32,32 +32,31 @@ session_start();
   <?php include ("menu.php"); ?>
 </header>
 
-<h3>Events (sur onglet de notification</h3>
- selon le cdc , notification = notif sur des evenements, donc evenement -> page notif ?
+<div class="container pb-2">
+    <div class="row justify-content-center ">
+        <div class="col col-lg-7 "><div class="post_job p-3 rounded">
 
-<br /> - ajouter un Events 
-<br /> - afficher les events et bouton pour y participer
-<div class="container">
- 	<div id="event_box" class="col-lg-7 rounded p-1 mx-auto">
- 	<h4> Mes evenements</h4><br/><br/>
-
+        <h4>Organiser un evenement</h4>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <label> Description :</label> <input class="form-control"  type="text" name="text" required>
+            <label>Lieu : </label><input class="form-control" type="text" name="location" required><br>
+            <div class="row">
+            <div class="col">
+            <label>Date : </label><input class="form-control" type="date" name="date" required><br>
+            </div><div class="col"> 
+            <label>Heure : </label><input class="form-control" type="time" name="time" required><br></div>
+            </div>
+            <input class="btn" type="submit" value="Valider" name="submit"><br>
+        </form>
+        </div></div>
+    </div>
 </div>
-</div>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-    Organiser un événement :<br>
-    Description : <input type="text" name="text"><br>
-    Lieu : <input type="text" name="location"><br>
-    Date : <input type="date" name="date"><br>
-    Heure : <input type="time" name="time"><br>
-    <input type="submit" value="Valider" name="submit"><br>
-</form>
-
-<footer></footer>
-</body>
-
-</html>
-
+<div class="container pb-2">
+<div class="row justify-content-center ">
+    <div class="col col-lg-7 ">
+    <br/>
+    <h4>Evenements</h4>
 <?php
     try
     {
@@ -107,3 +106,10 @@ session_start();
         $bdd->exec($sql);
     }
 ?>
+</div></div>
+</div>
+
+<footer></footer>
+</body>
+
+</html>

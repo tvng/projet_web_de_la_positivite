@@ -40,9 +40,6 @@ body {
     border-color:#ececec;
 }
 
-.comment_style{
-
-}
 
 .pp_comment {
     max-width: 40px; 
@@ -134,6 +131,5 @@ body {
 .card-columns {
     background-color:#ffffff;
     display: inline-block;
-    align: center;
   }
 

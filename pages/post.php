@@ -47,10 +47,37 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
 </div>
 
 <div class="collapse" id="box_<?php echo $data['ID_post']; ?>">
-     <div class="comment_box">
+    <div class="comment_box">
         - commenter
-
+        
+        
+        <form class="form-inline " action="" method="post"> 
+            <div class="form-group container-fluid">
+                <div class="col col-md-auto">
+                    <div  class="pp_comment">
+                        <?php
+                        echo '<img src="'.$_SESSION['profile_pic'].'" class="img-fluid rounded-circle"> ';
+                        ?>
+                    </div>
+                </div>
+                <textarea name="comment_text" class="form-control col-md-8 mr-sm-2" placeholder="Commentaire" required></textarea> 
+                <?php echo '<input class="btn" type="submit" value="comment" name="comment_'.$data['ID_post'].'">';
+                ?>
+            </div>
+         </form>
+        
+        
+    
         <?php
+        // SI ON A VALIDER LE POSTAGE DE COMMENTAIRE
+        if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment_'.$data['ID_post']])){
+            $sql="INSERT INTO comment (ID_author, ID_post, comment_time, comment_date, comment_text)
+            VALUES ('".$_SESSION['ID_user']."', '".$data['ID_post']."', '". date('h:i:s')."', '".date('Y-m-d')."', '".$_POST['comment_text']."' )";
+            $bdd->exec($sql);
+        }
+
+
+        ///////// AFFICHAGE DES COMMENTAIRES
         $sqlco="SELECT comment.ID_author, comment.comment_date, comment.comment_time, comment.comment_text,
         user.profile_pic,user.first_name,user.name
         FROM comment 

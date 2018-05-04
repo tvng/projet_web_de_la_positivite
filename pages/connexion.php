@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Connection']))
             $_SESSION['first_name'] = $result['first_name'];
             $_SESSION['pseudo'] = $result['pseudo'];
             $_SESSION['email'] = $result['email'];
+            $_SESSION['profile_pic'] = $result['profile_pic'];
 
             header("Location: home.php");
             exit();

@@ -62,7 +62,7 @@ session_start();
     }
     $jobs_applied->closeCursor();
 
-    $sql="SELECT * FROM job INNER JOIN user ON job.author = user.ID_user WHERE ID_job <> ANY(SELECT DISTINCT job.ID_job 
+    $sql="SELECT * FROM job INNER JOIN user ON job.author = user.ID_user WHERE ID_job <> ALL(SELECT DISTINCT job.ID_job 
     FROM job INNER JOIN apply_to ON job.ID_job = apply_to.ID_job WHERE apply_to.ID_user = ".$_SESSION['ID_user'].")";
     $jobs_to_take = $bdd->query($sql);
 

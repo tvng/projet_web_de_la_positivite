@@ -31,6 +31,7 @@ session_start();
   <!-- MENU -->
   <?php include ("menu.php"); ?>
 </header>
+
 <h3>Events (sur onglet de notification</h3>
  selon le cdc , notification = notif sur des evenements, donc evenement -> page notif ?
 
@@ -39,38 +40,54 @@ session_start();
 <div class="container">
  	<div id="event_box" class="col-lg-7 rounded p-1 mx-auto">
  	<h4> Mes evenements</h4><br/><br/>
-    
-    Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
-    Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
-    Morbi rhoncus eleifend justo, et semper tellus lacinia in.
-    Nulla posuere blandit quam ut dapibus.
-    Suspendisse potenti. Etiam dapibus laoreet posuere.
-    Proin dignissim justo sed nibh viverra vestibulum non a nulla. 
-    Nullam feugiat venenatis dui, eget condimentum leo viverra ac.
-    Nulla at augue sed augue porttitor fermentum ac eget urna. 
-    Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. 
-    Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
+
 </div>
 </div>
 
-
-<div class="container">
- 	<div id="event_box" class="col-lg-7 rounded p-1 mx-auto">
-	<h4> Wow un evenement!!</h4>
-    Vivamus dignissim Etiam nec diam at leo porttitor iaculis non nec nisi. 
-    Etiam velit lacus, iaculis ac tempus quis, convallis eget elit. 
-    Morbi rhoncus eleifend justo, et semper tellus lacinia in.
-    Nulla posuere blandit quam ut dapibus.
-    Suspendisse potenti. Etiam dapibus laoreet posuere.
-    Proin dignissim justo sed nibh viverra vestibulum non a nulla. 
-    Nullam feugiat venenatis dui, eget condimentum leo viverra ac.
-    Nulla at augue sed augue porttitor fermentum ac eget urna. 
-    Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. 
-    Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
-	</div>
-</div>
 
 <footer></footer>
 </body>
 
 </html>
+
+<?php
+    try
+    {
+        $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch (Exception $e)
+    {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+    /*
+    //Pour compter le nombre de events si jamais
+    $test = "SELECT count(ID_event) FROM event";
+    $test = $bdd->query($test);
+    $number_of_events = $test->fetch();
+    echo $number_of_events['count(ID_event)'];
+    */
+
+    $sql = "SELECT DISTINCT event.ID_event, author, date, time, location,date_post, time_post, text, name, first_name
+        FROM event INNER JOIN user ON event.author = user.ID_user INNER JOIN participate ON event.ID_event = participate.ID_event WHERE participate.ID_user = ".$_SESSION['ID_user'];
+    $events_applied = $bdd->query($sql);
+
+    $applied_to_event=true;
+    while ($data = $events_applied->fetch())
+    {
+        include ("event_box.php");
+    }
+    $events_applied->closeCursor();
+
+    $sql="SELECT * FROM event INNER JOIN user ON event.author = user.ID_user WHERE ID_event <> ALL(SELECT DISTINCT event.ID_event 
+        FROM event INNER JOIN participate ON event.ID_event = participate.ID_event WHERE participate.ID_user = ".$_SESSION['ID_user'].")";
+    $events_to_take = $bdd->query($sql);
+
+    $applied_to_event=false;
+    while ($data = $events_to_take->fetch())
+    {
+        include ("event_box.php");
+    }
+    $events_to_take->closeCursor();
+?>

@@ -38,9 +38,9 @@ session_start();
 
 
 <br/>
-- rechercher des gens et proposer de les ajouter en ami
+<!-- rechercher des gens et proposer de les ajouter en ami-->
 <br />
-- proposer de supprimer des amis  (additionnel)
+<!-- proposer de supprimer des amis  (additionnel)-->
 
 <?php
     try {

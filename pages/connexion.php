@@ -31,8 +31,8 @@
     <img src="../resources/logo.png" class="navbar-brand" width="30px">   
     <a class="navbar-brand" href="#">ECEperanto</a>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="form-inline mx-auto">
-            <input type="text" name="email" class="form-control mr-sm-2" placeholder="e-mail">
-            <input type="password" name="password"  class="form-control mr-sm-2" placeholder="mot de passe" >
+            <input type="text" name="email" class="form-control mr-sm-2" placeholder="e-mail" required>
+            <input type="password" name="password"  class="form-control mr-sm-2" placeholder="mot de passe" required>
             <input type="submit" value="Connection" name="Connection" class="btn mr-sm-2">
         </form>
 

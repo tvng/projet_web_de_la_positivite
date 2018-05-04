@@ -93,18 +93,6 @@
 <br />
 
 
-<div class="container">
-	<h3>Votre experience</h3>
-	<div class="row justify-content-center"><div class="col-lg-10 rounded p-2 experience_style">
-	- Afficher l'experience -
-
-	
-	<a href="#" class="btn btn-success" role="button">ajouter un nouveau poste!</a>
-	- on peut ajouter le poste dans un "modal" avec un form dedans -
-	</div>
-	</div>
-
-</div>
 
 <br />Tant qu'on y pense il faudrait rediriger le site vers connexion.php si ya pas de sessinon started 
 <br/>(cf plus haut dans le code)
@@ -113,7 +101,6 @@
 <div class="container">
 
 	<h3>Publications</h3>
-
 	
 <br />
 	+ AFFICHER LES POSTS PARTAGES 

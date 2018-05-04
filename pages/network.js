@@ -1,6 +1,5 @@
 
 
-/*
 function add(a) {
 
     var inputId = a.id;
@@ -36,4 +35,4 @@ function gotoprofile(a) {
         }
 
     });
-}*/
+}

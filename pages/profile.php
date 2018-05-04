@@ -47,6 +47,7 @@
 ?>
 
 	 <!-- Partie du haut : header + pp + prenom & cv etc -->
+	 
 <div class="profile_top">
 	<div class="profile_top_header">
 	<?php 

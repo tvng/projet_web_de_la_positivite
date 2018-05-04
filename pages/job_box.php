@@ -15,7 +15,7 @@ on fait un seul modèle qui sera appelé plusieurs fois -->
 
     if($applied_to_job == false){
         echo '<form action="" method="post">
-                <input type="submit" value="Postuler pour cet emploi" name="submit">
+                <input type="submit" value="Postuler pour cet emploi" name="submit_'.$data['ID_job'].'">
               </form>';
     }
     else{
@@ -26,7 +26,7 @@ on fait un seul modèle qui sera appelé plusieurs fois -->
 </div>
 
 <?php
-if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_'.$data['ID_job']])){
     //Faire en sorte que le gars postule avec sql
     //Du coup est ce qu'on fait un div légèrement différent pour les jobs auquel le gars a déjà postulé?
     $sql="INSERT INTO apply_to VALUES('" . $_SESSION['ID_user'] . "','" . $data['ID_job']."')";

@@ -32,7 +32,7 @@
                 <a class="dropdown-item" href="profile.php">Mon profil</a>
                 <a class="dropdown-item" href="settings.php">Paramètres</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Se déconnecter</a>
+                <a class="dropdown-item" href="deconnexion.php">Se déconnecter</a>
                 </div>
             </li>
         </ul>

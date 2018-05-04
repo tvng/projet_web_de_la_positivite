@@ -1,15 +1,15 @@
 
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
 <div class="container-fluid">
-    <div class="row">
+    <div class="row pb-1">
     <textarea id="desc" name="Description" class="form-control" placeholder="Description" required></textarea>
     </div>
 
-     <div class="row">
+     <div class="row pb-1">
         <input type="file" name="fileToUpload" id="fileToUpload">
     </div>
     <!-- emoji -->
-    <div class="row">
+    <div class="row pb-1">
         <select id="mood" name="Emotion" class="custom-select col-sm-3">
         <option selected>Mood</option>
         <option value="happy">:)</option>
@@ -23,8 +23,8 @@
    
     <div class="row">
 
-        <label>Visibilité : </label>
-        <select name="Visible" class="custom-select col-sm-2 ">
+        <label>Visibilité :  </label>
+        <select name="Visible" class="custom-select col-sm-2">
         <option selected value="Friends only">Mes amis</option>
         <option value="Everyone">Public</option>
         <option value="Myself only">Moi uniquement</option>

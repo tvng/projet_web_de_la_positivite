@@ -39,13 +39,15 @@ session_start();
   <div class="row justify-content-center">
   
     <div class="col-lg-7">
+
       <div class="row">
-        <div id="publish_box" class="col-lg-12 rounded p-1 mb-2">
+        <div id="publish_box" class="col-lg-12 rounded p-3 mb-2">
           <h4>Veux-tu publier quelque-chose ?</h4>
           <?php include ("publish.php"); ?>
         </div> 
         <br />
       </div>
+
       <div class="row">
         
         <?php
@@ -73,13 +75,11 @@ session_start();
           UNION 
           SELECT ID_user2 as User 
           FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] . ")
-          ");
+      		ORDER BY publication.date DESC, publication.time DESC");
 
           while ($data = $posts->fetch())
           {
-            echo '<div class="col-lg-12 post_style rounded p-2 pl-4">';
             include ("post.php");
-            echo "</div><br />";
           }
           $posts->closeCursor();
 
@@ -87,7 +87,7 @@ session_start();
 
       </div>
     </div>
-    
+    <!--
     <div id="event_box" class=" col-lg-4 rounded p-1"><h4> Wow un evenement!!</h4><br/><br/>
     
 
@@ -101,7 +101,7 @@ session_start();
     Nulla at augue sed augue porttitor fermentum ac eget urna. 
     Praesent egestas libero arcu. Mauris blandit vitae magna eu fermentum. 
     Cras ac purus sapien. Nunc ex leo, convallis id ornare a, scelerisque nec nunc. In rutrum dictum iaculis. Fusce arcu libero, ultrices at rhoncus in, lobortis at massa. Maecenas nec nisl sit amet justo laoreet luctus vel ultrices quam.
-    </div>
+    </div> -->
     
   </div>
 

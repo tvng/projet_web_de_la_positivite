@@ -29,7 +29,7 @@
             <div class="form-group">        
             <label> Statut au sein de l'Ecole :</label> 
             <select class="form-control" name="type">
-                <option value="student">Etudiant</option>
+                <option value=A"student">Etudiant</option>
                 <option value="professor">Professeur</option>
             </select>
             </div>

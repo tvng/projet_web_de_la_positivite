@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="71329743-5d36-427d-b8bf-5d4564ca9315" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/deconnexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/deconnexion.php" afterDir="false" />
-    </list>
+    <list default="true" id="71329743-5d36-427d-b8bf-5d4564ca9315" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,16 +47,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="job.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="job.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/job.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+            <state relative-caret-position="204">
+              <caret line="49" column="37" lean-forward="true" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deconnexion.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="deconnexion.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/deconnexion.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -71,8 +68,8 @@
       <file leaf-file-name="job_box.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/job_box.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="48" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="48" />
+            <state relative-caret-position="357">
+              <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -171,16 +168,15 @@
       <workItem from="1525253143699" duration="608000" />
       <workItem from="1525352893819" duration="14359000" />
       <workItem from="1525438576999" duration="837000" />
-      <workItem from="1525439474009" duration="328000" />
+      <workItem from="1525439474009" duration="640000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19507000" />
+    <option name="totallyTimeSpent" value="19819000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15494792" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -351,20 +347,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/job_box.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="48" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/job.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/connexion.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-544">
@@ -383,6 +365,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/job_box.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/job.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="49" column="37" lean-forward="true" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
         </state>
       </provider>
     </entry>

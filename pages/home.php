@@ -76,11 +76,24 @@ session_start();
           SELECT ID_user2 as User 
           FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] . ")
       		ORDER BY publication.date DESC, publication.time DESC");
-
+         
+          echo ' <div class="col-md-12">';
           while ($data = $posts->fetch())
           {
             include ("post.php");
+            ?>
+            
+              
+              <div class="btn-group btn-group-justified"  style="width:100%;" role="group">
+                <a href="#" class="btn btn-primary" role="button">LIKE</a>
+                <a href="#" class="btn btn-primary" role="button">COMMENT</a>
+                <a href="#" class="btn btn-primary" role="button">SHARE</a> 
+              </div>
+              
+            
+            <?php
           }
+          echo '</div>';
           $posts->closeCursor();
 
         ?>

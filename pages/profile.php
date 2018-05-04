@@ -109,7 +109,6 @@
 	<h3>Publications</h3>
 
 	
-ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 <br />
 	+ AFFICHER LES POSTS PARTAGES 
 	<div class="row justify-content-center">
@@ -126,10 +125,14 @@ ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
 		WHERE ID_user=".$_SESSION['ID_user']."
 		ORDER BY publication.date DESC, publication.time DESC");
+
+		echo '<div class="col-md-12">';
 		while ($data = $posts->fetch())
-		{
+		{ 
 			include ("post.php");
+			
 		}
+		echo '</div>';
 	$posts->closeCursor();
 
 	?>

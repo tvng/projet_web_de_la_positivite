@@ -74,7 +74,7 @@ session_start();
 			//rien
 		}
 		//sinon on a mis une valeur, il faut alors chercher tt les gens avec un prenom comme ca
-		else { 
+		else {
 			$sl = $bdd->query(" SELECT ID_user, first_name, user.name, user.profile_pic
 			FROM user
 			WHERE 
@@ -86,26 +86,26 @@ session_start();
 			FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] .")
 			");
 		
-			while ($sl_data = $sl->fetch() )
+			while ($sl_data = $sl->fetch())
 			{
 				echo '<div class="card mx-auto text-center" style="width: 20vw;">';
 				echo '<img src="' .$sl_data['profile_pic'] .'" class="card-img-top img-fluid">';
 				echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
-				<h3 class="card-title">'.$sl_data["name"].' '.$sl_data["first_name"].'</h3>
-			
+                    <h3 class="card-title">'.$sl_data["name"].' '.$sl_data["first_name"].'</h3>
+                    <form action="" method="post">
+                        <input type="text" name="text" placeholder="Présentez vous"><br>
+                        <input type="submit" name="User_'. $sl_data['ID_user'] .'" value="Envoyer">
+                    </form>
 				</div>';
+
+                include ("network_traitement.php");
 			//	<a href="" id="'.$sl_data['ID_user'].'" onclick="gotoprofile(this)" name="gotoprofile" class="btn">Voir le profil</a>
 			//	<a href="" id="'.$sl_data['ID_user'].'" onclick="add(this)" name="add" class="btn">Ajouter un ami</a>
-				echo ""."</div>"; 
+				echo ""."</div>";
+
 			}
 		}
 
-	}
-
-
-	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add']))
-	{
-		echo "adddddddddddddddddddddddddE";	
 	}
 	?>
 	</div>
@@ -118,7 +118,7 @@ session_start();
 <!--  invitations           -->
 <div class="container col-sm-8" >
 	<h3>Mes invitations</h3>
-		</div>
+</div>
 
 <!--  AFFICHAGE DES AMIS -->
 <div class="container col-sm-8" >

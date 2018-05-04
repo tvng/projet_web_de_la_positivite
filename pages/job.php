@@ -43,14 +43,7 @@ session_start();
         die('Erreur : ' . $e->getMessage());
     }
 
-    /*
-    //Pour compter le nombre de jobs si jamais
-    $test = "SELECT count(ID_job) FROM job";
-    $test = $bdd->query($test);
-    $number_of_jobs = $test->fetch();
-    echo $number_of_jobs['count(ID_job)'];
-    */
-
+    //on va envoyer a job box les informations si l'offre a été accepté
     $sql = "SELECT DISTINCT job.ID_job, author, company, date_post, time_post, text, name, first_name
     FROM job INNER JOIN user ON job.author = user.ID_user INNER JOIN apply_to ON job.ID_job = apply_to.ID_job WHERE apply_to.ID_user = ".$_SESSION['ID_user'];
     $jobs_applied = $bdd->query($sql);
@@ -62,6 +55,7 @@ session_start();
     }
     $jobs_applied->closeCursor();
 
+//on va envoyer a job box les informations si l'offre n'a pas été accepté
     $sql="SELECT * FROM job INNER JOIN user ON job.author = user.ID_user WHERE ID_job <> ALL(SELECT DISTINCT job.ID_job 
     FROM job INNER JOIN apply_to ON job.ID_job = apply_to.ID_job WHERE apply_to.ID_user = ".$_SESSION['ID_user'].")";
     $jobs_to_take = $bdd->query($sql);

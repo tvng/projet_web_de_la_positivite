@@ -24,6 +24,8 @@ session_start();
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 	<!-- JQuery -->
   <script src="//code.jquery.com/jquery.min.js"></script>
+
+  <script src="network.js"></script>
 </head>
 
 <body>
@@ -91,26 +93,23 @@ session_start();
 				echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
 				<h3 class="card-title">'.$sl_data["name"].' '.$sl_data["first_name"].'</h3>
 			
-				<input name="pro_'.$sl_data['ID_user'].'" class="btn btn-success" value="Voir le profil" onclick="profil();">
-				
-				<input name="del_'.$sl_data['ID_user'].'" class="btn btn-outline-success" value="Ajouter en ami" onclick="delete();">
-			
 				</div>';
+			//	<a href="" id="'.$sl_data['ID_user'].'" onclick="gotoprofile(this)" name="gotoprofile" class="btn">Voir le profil</a>
+			//	<a href="" id="'.$sl_data['ID_user'].'" onclick="add(this)" name="add" class="btn">Ajouter un ami</a>
 				echo ""."</div>"; 
 			}
-			
 		}
 
+	}
+
+
+	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add']))
+	{
+		echo "adddddddddddddddddddddddddE";	
 	}
 	?>
 	</div>
 </div>
-<?php
-	function delete()
-	{
-		alert("Hello world!");
-	}
-?>
 
 
 

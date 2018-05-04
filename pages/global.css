@@ -75,6 +75,21 @@ body {
 
 }
 
+.post_job{
+    background-color: #c8ede5;
+    color:#007179;
+
+    border-width:1px;
+    border-style:solid;
+    border-color:#72bbb0;
+}
+.job_box {
+    background-color: #ffffff;
+    border-width:1px;
+    border-style:solid;
+    border-color:#ececec;
+}
+
 .profile_pic {
     padding-left: 10px; 
     width: 8vw;

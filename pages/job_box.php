@@ -5,21 +5,21 @@ session_start();
 <!-- Pour les propositions d'emplois
 on fait un seul modèle qui sera appelé plusieurs fois -->
 
-
-<div class="container" style="background-color: pink;">
+<div class="job_box rounded p-3 mt-3">
     <?php
+     echo '<h3 class="text-capitalize" style="margin:0px;">Entreprise: ' . $data["company"].'</h3>';
     echo "Emploi posté par : ". $data["name"] . " " .$data["first_name"]."<br>";
-    echo "de l'entreprise:" . $data["company"]."<br>";
-    echo "le " . $data["date_post"] . " à " . $data["time_post"] . "<br>";
-    echo "".$data["text"]."<br>";
+   
+    echo "Le " . $data["date_post"] . " à " . $data["time_post"] . "<br> <br/>";
+    echo "Description : ".$data["text"]."<br><br />";
 
     if($applied_to_job == false){
         echo '<form action="" method="post">
-                <input type="submit" value="Postuler pour cet emploi" name="submit_'.$data['ID_job'].'">
+                <input class="btn" type="submit" value="Postuler pour cet emploi" name="submit_'.$data['ID_job'].'">
               </form>';
     }
     else{
-        echo "Vous avez déjà postulé pour cet emploi";
+        echo '<button type="button" class="btn btn-secondary" disabled>Vous avez deja postulé pour ce poste</button>';
     }
 ?>
 

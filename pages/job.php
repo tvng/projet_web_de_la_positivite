@@ -31,17 +31,24 @@ session_start();
   <!-- MENU -->
 <?php include ("menu.php");?>
 </header>
-- afficher les emplois dispos et la possibilite de postuler
-
-
+<div class="container pb-2">
+<div class="row justify-content-center ">
+    <div class="col col-lg-7 "><div class="post_job p-3 rounded">
+    <h3>Déposer une offre d'emploi:</h3>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-    Déposer une offre d'emploi:<br>
-    Description : <input type="text" name="text"><br>
-    Entreprise : <input type="text" name="company"><br>
-    <input type="submit" value="Valider" name="submit"><br>
-</form>
+
+            <label> Description :  </label><input class="form-control" type="text" name="text" required><br>
+            <label> Entreprise :  </label><input class="form-control" type="text" name="company" required><br>
+            <input class="btn" type="submit" value="Valider" name="submit"><br>
+        </form>
+    </div></div>
+</div>
+</div>
 
 
+<div class="container pb-2">
+<div class="row justify-content-center ">
+    <div class="col col-lg-7 ">
 <?php
     try
     {
@@ -84,6 +91,9 @@ session_start();
         $bdd->exec($sql);
     }
 ?>
+</div>
+</div>
+</div>
 
 
 

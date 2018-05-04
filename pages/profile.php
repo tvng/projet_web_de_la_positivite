@@ -112,7 +112,8 @@
 ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 <br />
 	+ AFFICHER LES POSTS PARTAGES 
-
+	<div class="row justify-content-center">
+	<div class="col-lg-7">
 	<?php
 		
 		$get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
@@ -123,16 +124,16 @@ ORDER BY!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATE
 		publication.date, publication.time, publication.text, publication.location, publication.emotion, publication.media_link
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-		WHERE ID_user=".$_SESSION['ID_user']);
+		WHERE ID_user=".$_SESSION['ID_user']."
+		ORDER BY publication.date DESC, publication.time DESC");
 		while ($data = $posts->fetch())
 		{
-			echo '<div class="row justify-content-center"><div class="col-lg-10 post_style rounded p-2 pl-4">';
 			include ("post.php");
-			echo "</div></div><br />";
 		}
 	$posts->closeCursor();
 
 	?>
+	</div></div>
 </div>
 
 <footer></footer>

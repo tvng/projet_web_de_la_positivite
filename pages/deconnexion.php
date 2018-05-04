@@ -8,3 +8,6 @@ echo "Tu devrais être redirigé sur la connexion.";
 header("Location: connexion.php");
 exit();
 ?>
+
+<!DOCTYPE html>
+<a class="dropdown-item" href="connexion.php">Se déconnecter</a>

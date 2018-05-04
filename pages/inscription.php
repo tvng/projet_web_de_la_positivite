@@ -45,6 +45,8 @@
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Inscription'])) {
         echo "INSCRIPTION !";
+        $email = $_POST['email'];
+        $pseudo = $_POST['pseudo'];
         try
         {
             $empty = true;
@@ -64,6 +66,18 @@
                 $emailvalide = false;
             }
 
+            $mail_existe = true;
+            $existe = $bdd->prepare('SELECT * FROM user WHERE email = ? OR pseudo = ?');
+            $existe->execute(array($email, $pseudo));
+            $donnee = $existe->fetch();
+            //blindage pour ne pas avoir de mail existant deja
+            if($donnee == null)
+            {
+                $mail_existe = false;
+            }
+
+
+            //if($emailvalide == true AND $empty == false AND $mail_existe == false)
             if($emailvalide == true AND $empty == false)
             {
                 $sql="INSERT INTO user (name, first_name, email, password, type, pseudo, creation_date)
@@ -73,8 +87,8 @@
 
                 echo "L'inscription est complète. Bienvenue sur ECEperanto !";
                 //rediriger vers connexion une fois que c'est fait
-                header("localhost/projet_web_de_la_positivite/pages/connexion.php");
-                exit;
+                header("Location: connexion.php");
+                exit();
             }
 
         }

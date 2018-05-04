@@ -68,6 +68,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Bannissement']))
         $data = $instruct->fetch();
         $destroy = $bdd->prepare('DELETE FROM user WHERE ID_user = ?');
         $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM admin WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM apply_to WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM comment WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM connect_with WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM event WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM invitation WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM job WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM media WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM participate WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM post_comment WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM publication WHERE ID_user = ?');
+        $destroy->execute($data);
+        $destroy = $bdd->prepare('DELETE FROM shared_post WHERE ID_user = ?');
+        $destroy->execute($data);
     }
     else
     {

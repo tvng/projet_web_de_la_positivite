@@ -48,10 +48,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Admin']))
     if($_POST['action'] == "inscription")
     {
         //aller vers l'inscription
+        header("localhost/projet_web_de_la_positivite/pages/inscription.php");
+        exit;
     }
     if($_POST['action'] == "ban")
     {
         //aller vers le bannissement
+        header("localhost/projet_web_de_la_positivite/pages/bannissement.php");
+        exit;
     }
 }
 ?>

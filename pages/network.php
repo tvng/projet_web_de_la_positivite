@@ -49,27 +49,29 @@ session_start();
 		catch (Exception $e)
 	{
 		die('Erreur : ' . $e->getMessage());
-    } 
+    }
 
-    
+
 ?>
 
 <!-- RECHERCE D'AMI -->
 <div class="container col-sm-8" >
-	
+
 	<h3>Rechercher une personne</h3>
 
-	<form class="form-inline" method="GET">
+	<form class="form-inline" method="POST">
     <input type="text" class="form-control" name="chercher_ami" placeholder="Search">
     <input type="submit" class="btn" name="chercher" value="Chercher">
 	</form>
 
 	<div class="card-columns">
 	<?php
-	if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['chercher']))
+    /*
+    $search_done=false;
+	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['chercher']))
 	{
 		//si recherche vide
-		if ($_GET['chercher_ami'] === "")
+		if ($_POST['chercher_ami'] === "")
 		{
 			//rien
 		}
@@ -78,35 +80,39 @@ session_start();
 			$sl = $bdd->query(" SELECT ID_user, first_name, user.name, user.profile_pic
 			FROM user
 			WHERE 
-			(first_name LIKE '".$_GET['chercher_ami']."%' OR user.name LIKE '".$_GET['chercher_ami']."%' )
-			AND ID_user <> ALL (" ."SELECT ID_user1 as User 
+			(first_name LIKE '%" . $_POST['chercher_ami'] . "%' OR user.name LIKE '%" . $_POST['chercher_ami'] . "%' )
+			AND ID_user <> ALL ("."SELECT ID_user1 as User 
 			FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
 			UNION 
 			SELECT ID_user2 as User 
 			FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] .")
 			");
-		
-			while ($sl_data = $sl->fetch())
-			{
-				echo '<div class="card mx-auto text-center" style="width: 20vw;">';
-				echo '<img src="' .$sl_data['profile_pic'] .'" class="card-img-top img-fluid">';
-				echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
-                    <h3 class="card-title">'.$sl_data["name"].' '.$sl_data["first_name"].'</h3>
-                    <form action="" method="post">
-                        <input type="text" name="text" placeholder="Présentez vous"><br>
-                        <input type="submit" name="User_'. $sl_data['ID_user'] .'" value="Envoyer">
-                    </form>
-				</div>';
-
-                include ("network_traitement.php");
-			//	<a href="" id="'.$sl_data['ID_user'].'" onclick="gotoprofile(this)" name="gotoprofile" class="btn">Voir le profil</a>
-			//	<a href="" id="'.$sl_data['ID_user'].'" onclick="add(this)" name="add" class="btn">Ajouter un ami</a>
-				echo ""."</div>";
-
-			}
+			$search_done=true;
 		}
-
 	}
+    */
+        $sql="SELECT ID_user, first_name, user.name, user.profile_pic FROM user WHERE 
+			ID_user <> ALL ("."SELECT ID_user1 as User 
+			FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
+			UNION 
+			SELECT ID_user2 as User 
+			FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'].")";
+        $sl=$bdd->query($sql);
+
+        while ($sl_data = $sl->fetch()) {
+            echo '<div class="card mx-auto text-center" style="width: 20vw;">';
+            echo '<img src="' . $sl_data['profile_pic'] . '" class="card-img-top img-fluid">';
+            echo '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
+                <h3 class="card-title">' . $sl_data["name"] . ' ' . $sl_data["first_name"] . '</h3>
+                <form action="" method="post">
+                    <input type="text" name="text" placeholder="Présentez vous"><br>
+                    <input type="submit" name="submit_' . $sl_data['ID_user'] . '" value="Envoyer">
+                </form>
+            </div>';
+
+            include("network_traitement.php");
+            echo "" . "</div>";
+        }
 	?>
 	</div>
 </div>

@@ -63,7 +63,9 @@ session_start();
 
 
 <br/>
+<!-- rechercher des gens et proposer de les ajouter en ami-->
 <br />
+<!-- proposer de supprimer des amis  (additionnel)-->
 
 <?php
     try {
@@ -72,6 +74,7 @@ session_start();
 		catch (Exception $e)
 	{
 		die('Erreur : ' . $e->getMessage());
+    }
 
 
 ?>
@@ -81,7 +84,6 @@ session_start();
 
 	<h3>Rechercher une personne</h3>
 
-	<form class="form-inline" method="GET">
 	<form class="form-inline" method="POST">
     <input type="text" class="form-control" name="chercher_ami" placeholder="Search">
     <input type="submit" class="btn" name="chercher" value="Chercher">

@@ -7,6 +7,7 @@ on fait un seul modèle qui sera appelé plusieurs fois -->
 
 
 <div class="container" style="background-color: pink;">
+    <!-- Offre d'emploi -->
     <?php
     echo "Emploi posté par : ". $data["name"] . " " .$data["first_name"]."<br>";
     echo "de l'entreprise:" . $data["company"]."<br>";
@@ -24,7 +25,7 @@ on fait un seul modèle qui sera appelé plusieurs fois -->
 ?>
 
 </div>
-
+    <!-- Offre d'emploi -->
 <?php
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_'.$data['ID_job']])){
     //Faire en sorte que le gars postule avec sql

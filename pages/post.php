@@ -37,5 +37,5 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
 <div class="btn-group btn-group-justified"  style="width:100%;" role="group">
                 <a href="#" class="btn btn-primary" role="button">LIKE</a>
                 <a href="#" class="btn btn-primary" role="button">COMMENT</a>
-                <a href="#" class="btn btn-primary" role="button">SHARE</a> 
-              </div>
+                <a href="#" class="btn btn-primary" role="button">SHARE</a>
+</div>

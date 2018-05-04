@@ -100,7 +100,7 @@ session_start();
     $events_to_take->closeCursor();
 
     //Ajout d'un événement
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         $sql="INSERT INTO event (author, date_post, time_post, date, time, location, text) VALUES('".$_SESSION['ID_user']."','".date('Y-m-d')."','".date('h:i:s')
             ."','".$_POST['date'] . "','" . $_POST['time'] . "','". $_POST['location'] . "','". $_POST['text'] . "')";
         echo $sql;

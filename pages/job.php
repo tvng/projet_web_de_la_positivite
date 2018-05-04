@@ -29,10 +29,20 @@ session_start();
 <body>
 <header>
   <!-- MENU -->
-
+<?php include ("menu.php");?>
 </header>
 - afficher les emplois dispos et la possibilite de postuler
-<?php include ("menu.php");
+
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    Déposer une offre d'emploi:<br>
+    Description : <input type="text" name="text"><br>
+    Entreprise : <input type="text" name="company"><br>
+    <input type="submit" value="Valider" name="submit"><br>
+</form>
+
+
+<?php
     try
     {
         $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
@@ -72,6 +82,13 @@ session_start();
         include ("job_box.php");
     }
     $jobs_to_take->closeCursor();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+        $sql="INSERT INTO job (author, date_post, time_post, company, text) VALUES('".$_SESSION['ID_user']."','".date('Y-m-d')."','".date('h:i:s')
+            ."','" . $_POST['company'] . "','". $_POST['text'] . "')";
+        echo $sql;
+        $bdd->exec($sql);
+    }
 ?>
 
 

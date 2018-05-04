@@ -26,7 +26,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #007179;">
-
+    <!-- Entrée des informations de la personne à bannir -->
     <img src="../resources/logo.png" class="navbar-brand" width="30px">
     <a class="navbar-brand" href="#">ECEperanto</a>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="form-inline mx-auto">
@@ -63,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Bannissement']))
     $instruct = $bdd->prepare('SELECT ID_user FROM user WHERE email = ?');
     $ban= $instruct->execute(array($email));
 
+    //on efface l'utiisateur de toutes les bases de données
     if($ban != null)
     {
         $data = $instruct->fetch();

@@ -29,6 +29,7 @@
 
     <img src="../resources/logo.png" class="navbar-brand" width="30px">
     <a class="navbar-brand" href="#">ECEperanto</a>
+    <!-- on demande l'action que veut effecter l'administrateur -->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="form-inline mx-auto">
         <select class="form-control" name="action">
             <option value="ban">Bannissement</option>

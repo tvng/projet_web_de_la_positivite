@@ -42,11 +42,11 @@ session_start();
 			
 			$.post(ajaxurl, data, function (response) {
 				// Response div goes here.
-				alert(txt);
+				
 			})  
 			
 			.done(function( response ){
-		alert( "Data Loaded: " + response );
+		alert(response);
 	});
 		});
 
@@ -252,9 +252,11 @@ while ($sl_data = $sl->fetch()) {
 			echo '<img src="' .$fl_data['profile_pic'] .'" class="card-img-top img-fluid">';
 			echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
 			<h3 class="card-title">'.$fl_data["name"].' '.$fl_data["first_name"].'</h3>
+			<form>
 			<a href="#" class="btn btn-success">Voir le profil</a>
 			<a href="#" class="btn btn-outline-success">Supprimer des amis</a>
-			</div>';
+			</form></div>';
+			
 			echo ""."</div>"; 
 			
 		}

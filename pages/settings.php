@@ -107,7 +107,7 @@ session_start();
             }
 
             $sql="UPDATE user SET profile_pic = '".$target_file. "' WHERE ID_user = " . $_SESSION['ID_user'];
-            echo $sql;
+            //echo $sql;
             $bdd->exec($sql);
         }
         else{

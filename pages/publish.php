@@ -103,7 +103,7 @@ function poster() {
         $sql="INSERT INTO publication(ID_author, date, time, visibility, location, emotion, text, media_link)
         VALUES ('" . $_SESSION['ID_user'] . "','" . date('Y-m-d') . "','"  . date('h:i:s') . "','" . $_POST['Visible'] . "','" . $_POST['Lieu'] . "','" .
         $_POST['Emotion'] . "','" . $_POST['Description'] . "','" . $target_file . "')";
-        echo $sql;
+        //echo $sql;
         $bdd->exec($sql);
     }
     else{

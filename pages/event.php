@@ -102,7 +102,7 @@ session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         $sql="INSERT INTO event (author, date_post, time_post, date, time, location, text) VALUES('".$_SESSION['ID_user']."','".date('Y-m-d')."','".date('h:i:s')
             ."','".$_POST['date'] . "','" . $_POST['time'] . "','". $_POST['location'] . "','". $_POST['text'] . "')";
-        echo $sql;
+        //echo $sql;
         $bdd->exec($sql);
     }
 ?>

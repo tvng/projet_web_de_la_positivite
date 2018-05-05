@@ -29,7 +29,7 @@
 </header>
  <!-- BDD -->
 <?php
-echo $_POST["id"];
+ $idd=$_POST["id"];
 	try {
 		$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
 	}
@@ -44,7 +44,7 @@ echo $_POST["id"];
 <div class="profile_top">
 <?php 
 		$header_sql = $bdd->query("SELECT header_pic, profile_pic, CV_link, user.name AS uname, first_name, pseudo, user.type AS utype 
-		FROM user WHERE ID_user=".$_POST['id']);
+		FROM user WHERE ID_user=".$idd);
 		$header_data = $header_sql->fetch();
 		//echo '<img src="'.$header_data['header_pic'].'" class="img" alt="header"> ';
 		echo '<div class="profile_top_header" style="background-image:url('.$header_data['header_pic'].')">';
@@ -101,7 +101,7 @@ echo $_POST["id"];
 		publication.ID_post, publication.date, publication.time, publication.text, publication.location, publication.emotion, publication.media_link, publication.nb_like
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-		WHERE ID_user=".$_POST['id']."
+		WHERE ID_user=".$idd."
 		ORDER BY publication.date DESC, publication.time DESC");
 
 		echo '<div class="col-md-12">';
@@ -119,7 +119,7 @@ echo $_POST["id"];
             $target_file=" ";
         }
         else {
-            $target_dir = "user".$_POST['id'];
+            $target_dir = "user".$idd;
             if (!is_dir($target_dir))
                 mkdir($target_dir);
 
@@ -144,7 +144,7 @@ echo $_POST["id"];
             }
         }
 
-        $sql="UPDATE user SET CV_link = '".$target_file. "' WHERE ID_user = " . $_POST['id'];
+        $sql="UPDATE user SET CV_link = '".$target_file. "' WHERE ID_user = " .$idd;
         //echo $sql;
         $bdd->exec($sql);
     }

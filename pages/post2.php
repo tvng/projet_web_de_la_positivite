@@ -1,3 +1,4 @@
+
 <!-- post 
 On fait un seul modèle qui sera appelé plusieurs fois -->
 
@@ -51,7 +52,7 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
 <?php 
     $liked_sql = $bdd->query("SELECT ID_liker FROM like_post 
     WHERE ID_liked='".$data["ID_post"]."' 
-    AND ID_liker='".$_POST["id"]."' ");
+    AND ID_liker='".$idd."' ");
     $liked = $liked_sql->fetch();
     
     if (is_array($liked) )
@@ -70,14 +71,14 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
     <?php
    if ($can_like === true )
    {
-    echo '<input class="btn" type="submit" value="'. $nb_likes_data['count_likes'].' LIKE" name="like_'.$data['ID_post'].'">';
+    echo '<input class="btn" type="submit" value="'. $nb_likes_data['count_likes'].' LIKE" name="like_'.$data['ID_post'].'" disabled>';
    }
    else {
-    echo '<input class="btn btn-success" type="submit" value="'. $nb_likes_data['count_likes'].' LIKE" name="like_'.$data['ID_post'].'">';
+    echo '<input class="btn btn-success" type="submit" value="'. $nb_likes_data['count_likes'].' LIKE" name="like_'.$data['ID_post'].'" disabled>';
    }
   
-    echo '<a class="btn" data-toggle="collapse" href="#box_'.$data['ID_post'].'" role="button" aria-expanded="false">COMMENT</a>';
-    echo '<input class="btn" type="submit" value="SHARE" name="share_'.$data['ID_post'].'">';
+    echo '<a class="btn" data-toggle="collapse" href="#box_'.$data['ID_post'].'" role="button" aria-expanded="false" >COMMENT</a>';
+    echo '<input class="btn" type="submit" value="SHARE" name="share_'.$data['ID_post'].'" disabled>';
     ?>
     </form></div>
 
@@ -87,11 +88,11 @@ On fait un seul modèle qui sera appelé plusieurs fois -->
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like_'.$data['ID_post']])){
     if ($can_like===true){        
-        $sql_like="INSERT INTO like_post VALUES('" . $_POST["id"] . "','" . $data['ID_post']."')";
+        $sql_like="INSERT INTO like_post VALUES('" . $idd . "','" . $data['ID_post']."')";
         $bdd->exec($sql_like);
     }
     else{
-        $sql_like="DELETE FROM like_post WHERE ID_liked='".$data["ID_post"]."' AND ID_liker='".$_POST["id"]."' ";
+        $sql_like="DELETE FROM like_post WHERE ID_liked='".$data["ID_post"]."' AND ID_liker='".$idd."' ";
         $bdd->exec($sql_like);
     }
     
@@ -110,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like_'.$data['ID_post']
         // SI ON A VALIDE LE POSTAGE DE COMMENTAIRE
         if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment_'.$data['ID_post']])){
             $sql="INSERT INTO comment (ID_author, ID_post, comment_time, comment_date, comment_text)
-            VALUES ('".$_POST["id"]."', '".$data['ID_post']."', '". date('h:i:s')."', '".date('Y-m-d')."', '".$_POST['comment_text']."' )";
+            VALUES ('".$idd."', '".$data['ID_post']."', '". date('h:i:s')."', '".date('Y-m-d')."', '".$_POST['comment_text']."' )";
             $bdd->exec($sql);
         }
 

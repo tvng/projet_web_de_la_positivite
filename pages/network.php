@@ -237,7 +237,7 @@ while ($sl_data = $sl->fetch()) {
 <?php	
 
 		$friendlist = $bdd->query(
-		"SELECT user.name, user.first_name, profile_pic FROM user where ID_user = 
+		"SELECT user.ID_user, user.name, user.first_name, profile_pic FROM user where ID_user = 
 		ANY (" ."SELECT ID_user1 as User 
 		FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
 		UNION 
@@ -246,20 +246,34 @@ while ($sl_data = $sl->fetch()) {
 		"
 		 );
 
+		 
+
 		 while ($fl_data = $friendlist->fetch() )
 		{
 			echo '<div class="card mx-auto text-center" style="width: 20vw;">';
 			echo '<img src="' .$fl_data['profile_pic'] .'" class="card-img-top img-fluid">';
 			echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
 			<h3 class="card-title">'.$fl_data["name"].' '.$fl_data["first_name"].'</h3>
-			<form>
-			<a href="#" class="btn btn-success">Voir le profil</a>
-			<a href="#" class="btn btn-outline-success">Supprimer des amis</a>
+			<form method="post">
+			<a href="#" name="'. $fl_data['ID_user'] .'" class="btn btn-success" value="voir_profil">Voir le profil</a>
+			<input class="btn" type="submit" value="Supprimer des amis" name="del_'.$fl_data['ID_user'].'">
 			</form></div>';
 			
 			echo ""."</div>"; 
-			
+
+			if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['del_'.$fl_data['ID_user']])){
+				//Faire en sorte que le gars postule avec sql
+				//Du coup est ce qu'on fait un div légèrement différent pour les jobs auquel le gars a déjà postulé?
+				$sql="DELETE FROM connect_with 
+				WHERE (ID_user1 ='".$fl_data['ID_user']."' AND ID_user2 ='".$_SESSION['ID_user']."' )
+				OR (ID_user1='".$_SESSION['ID_user']."' AND ID_user2='".$fl_data['ID_user']."') 
+				";
+				$bdd->exec($sql);
+				echo '<div class="alert alert-success" role="alert">Vous avez supprimé cet ami </div>';
+			}
+		
 		}
+	
 
 ?></div>
 </div>

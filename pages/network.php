@@ -28,6 +28,31 @@ session_start();
     <script src="http://code.jquery.com/jquery.min.js"></script>
 
 	<script src="jquery.redirect.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('.add_friend').click(function(){
+			
+			var buttonValue = $(this).val();
+			var id_btn =$("#a").attr("name") ;
+			var txt = $("#t").val();
+
+			var ajaxurl = "network_traitement2.php",
+			data =  {'action': buttonValue,
+			'id_user': id_btn,
+			'txt':txt};
+
+			$.post(ajaxurl, data, function (response) {
+				// Response div goes here.
+			})  
+			
+			.done(function( response ){
+				alert(response);
+			});
+		});
+
+	}); </script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$('.go_to_pro').click(function(){
@@ -49,34 +74,13 @@ session_start();
 
 				
 				.done(function( response ){
-					delete id_btn;
+					
 				});
 			});
 		});
 	</script>
 	
-	<script type="text/javascript">
-	$(document).ready(function(){
-		
-		$('.add_friend').click(function(){
-			var buttonValue = $(this).val();
-			var id_btn =$("#p").attr("name") ;
 
-			var ajaxurl = "network_traitement2.php",
-			data =  {'action': buttonValue,
-			'id_user': id_btn,
-			'txt':txt};
-			
-			$.post(ajaxurl, data, function (response) {
-				// Response div goes here.
-				
-			})  
-			
-			.done(function( response ){
-			});
-		});
-
-	}); </script>
 </head>
 
 <body>

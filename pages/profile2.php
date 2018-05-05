@@ -1,4 +1,3 @@
-<?php echo $_POST['id']?>
 <!DOCTYPE html>
 <html lang="en">
 

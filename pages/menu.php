@@ -24,9 +24,9 @@
             <li class="nav-item">
                 <!-- Redirige vers le réseau de l'utilisateur -->
                 <a class="nav-link" href="network.php">Mon reseau</a></li>
-          <!--  <li class="nav-item">
-                <a class="nav-link" href="#">Messagerie</a></li> 
-            -->
+                <li class="nav-item">
+                <!-- Redirige vers la messagerie (dont les invitations d'amis) de l'utilisateur-->
+                <a class="nav-link" href="messagerie.php">Messagerie</a></li>
             <li class="nav-item">
                 <!-- Redirige vers les évenements de l'utilisateur-->
                 <a class="nav-link" href="event.php">Notifications (event)</a></li>

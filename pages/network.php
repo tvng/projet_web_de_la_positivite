@@ -25,7 +25,32 @@ session_start();
 	<!-- JQuery -->
   <script src="//code.jquery.com/jquery.min.js"></script>
 
-  <script src="network.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('.add_friend').click(function(){
+			
+			var buttonValue = $(this).val();
+			var id_btn =$("#a").attr("name") ;
+			var txt = $("#t").val();
+
+			var ajaxurl = "network_traitement2.php",
+			data =  {'action': buttonValue,
+			'id_user': id_btn,
+			'txt':txt};
+			
+			$.post(ajaxurl, data, function (response) {
+				// Response div goes here.
+				alert(txt);
+			})  
+			
+			.done(function( response ){
+		alert( "Data Loaded: " + response );
+	});
+		});
+
+		}); </script>
 </head>
 
 <body>
@@ -55,17 +80,19 @@ session_start();
 ?>
 
 <!-- RECHERCE D'AMI -->
+<!--
 <div class="container col-sm-8" >
 	
 	<h3>Rechercher une personne</h3>
 
-	<form class="form-inline" method="GET">
+	<form class="form-inline" method="POST">
     <input type="text" class="form-control" name="chercher_ami" placeholder="Search">
     <input type="submit" class="btn" name="chercher" value="Chercher">
 	</form>
 
-	<div class="card-columns">
+	<div class="card-columns">-->
 	<?php
+	/*
 	if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['chercher']))
 	{
 		//si recherche vide
@@ -108,9 +135,92 @@ session_start();
 
 	}
 	?>
+
+	*/
+
+/*
+	$sql="SELECT ID_user, first_name, user.name, user.profile_pic FROM user WHERE 
+	ID_user <> ALL ("."SELECT ID_user1 as User 
+	FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
+	UNION 
+	SELECT ID_user2 as User 
+	FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'].")";
+$sl=$bdd->query($sql);
+
+while ($sl_data = $sl->fetch()) {
+	echo '<div class="card mx-auto text-center" style="width: 20vw;">';
+	echo '<img src="' . $sl_data['profile_pic'] . '" class="card-img-top img-fluid">';
+	echo '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
+		<h3 class="card-title">' . $sl_data["name"] . ' ' . $sl_data["first_name"] . '</h3>
+		<form action="" method="post">
+			<input type="text" name="text" placeholder="Présentez vous"><br>
+			<input type="submit" name="submit_' . $sl_data['ID_user'] . '" value="Envoyer">
+		</form>
+	</div>';
+
+	include("network_traitement.php");
+	echo "" . "</div>";
+}*/
+?>
+
+<!--
+
 	</div>
 </div>
+-->
+<!-- RECHERCE D'AMI -->
 
+<div class="container col-sm-8" >
+	
+	<h3>Rechercher une personne</h3>
+
+	<form class="form-inline" method="GET">
+    <input type="text" class="form-control" name="chercher_ami" placeholder="Search">
+    <input type="submit" class="btn" name="chercher" value="Chercher">
+	</form>
+
+	<div class="card-columns">
+		<?php
+		
+		if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['chercher']))
+		{
+			//si recherche vide
+			if ($_GET['chercher_ami'] === "")
+			{
+				//rien
+			}
+			//sinon on a mis une valeur, il faut alors chercher tt les gens avec un prenom comme ca
+			else {
+				$sl = $bdd->query(" SELECT ID_user, first_name, user.name, user.profile_pic
+				FROM user
+				WHERE 
+				(first_name LIKE '".$_GET['chercher_ami']."%' OR user.name LIKE '".$_GET['chercher_ami']."%' )
+				AND ID_user <> ALL (" ."SELECT ID_user1 as User 
+				FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
+				UNION 
+				SELECT ID_user2 as User 
+				FROM connect_with WHERE ID_user1 =" . $_SESSION['ID_user'] .")
+				");
+			
+				while ($sl_data = $sl->fetch())
+				{
+					echo '<div class="card mx-auto text-center" style="width: 20vw;">';
+					echo '<img src="' .$sl_data['profile_pic'] .'" class="card-img-top img-fluid">';
+					echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
+					<h3 class="card-title">'.$sl_data["name"].' '.$sl_data["first_name"].'</h3>   
+					<form>     
+					<input id="t" type="text" class="text_ami" name="text_ami">       
+                        <input id="a" type="submit" class="add_friend" name="'. $sl_data['ID_user'] .'" value="Ajouter en ami">
+						</form></div>';
+						echo ""."</div>";
+
+				}
+			}
+
+		}
+		?>
+	</div>
+</div>
 
 
 

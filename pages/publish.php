@@ -42,7 +42,6 @@
 
 
 function poster() {
-    echo("POST DEBUG -----------------<br>");
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
     }
@@ -73,7 +72,7 @@ function poster() {
 
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             //Petit test pour s'assurer qu'on créer le bon fichier
-            echo $target_file."<br>";
+            
 
             //Tests d'intégrité du fichier (taille, type, non doublon etc)
             $uploadOk = 1;

@@ -57,7 +57,7 @@
 		echo '<div class="profile_top_header" style="background-image:url('.$header_data['header_pic'].')">';
 	?>
 	
-	
+	.
 	</div>
 	<div class="profile_top_pic_name">
 		<div class="row">

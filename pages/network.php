@@ -194,7 +194,7 @@ while ($sl_data = $sl->fetch()) {
 				$sl = $bdd->query(" SELECT ID_user, first_name, user.name, user.profile_pic
 				FROM user
 				WHERE 
-				(first_name LIKE '".$_GET['chercher_ami']."%' OR user.name LIKE '".$_GET['chercher_ami']."%' )
+				(first_name LIKE '%".$_GET['chercher_ami']."%' OR user.name LIKE '%".$_GET['chercher_ami']."%' )
 				AND ID_user <> ALL (" ."SELECT ID_user1 as User 
 				FROM connect_with WHERE ID_user2 =" . $_SESSION['ID_user'] . " 
 				UNION 

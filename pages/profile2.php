@@ -1,11 +1,4 @@
-<?php
-	if (session_status() == PHP_SESSION_NONE)
-	{
-		//redirect
-		//http://localhost/projet_web_de_la_positivite/pages/connexion.php
-	}
-	session_start();
-?>
+<?php echo $_POST['id']?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +30,7 @@
 </header>
  <!-- BDD -->
 <?php
+echo $_POST["id"];
 	try {
 		$bdd = new PDO('mysql:host=localhost;dbname=eceperanto;charset=utf8', 'root', '');
 	}
@@ -51,7 +45,7 @@
 <div class="profile_top">
 <?php 
 		$header_sql = $bdd->query("SELECT header_pic, profile_pic, CV_link, user.name AS uname, first_name, pseudo, user.type AS utype 
-		FROM user WHERE ID_user=".$_SESSION['ID_user']);
+		FROM user WHERE ID_user=".$_POST['id']);
 		$header_data = $header_sql->fetch();
 		//echo '<img src="'.$header_data['header_pic'].'" class="img" alt="header"> ';
 		echo '<div class="profile_top_header" style="background-image:url('.$header_data['header_pic'].')">';
@@ -81,13 +75,6 @@
 	<div class="row justify-content-center">
         <!--<object data="Henri%20Verclytte%20CV.pdf" height="900" width="600"></object>-->
 		<a href="<?php echo $header_data['CV_link'];?>"class="btn btn-success" role="button" target="_blank">Afficher le CV</a>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
-            <input type="file" value="Modifier le CV" name="CV">
-            <input type="submit" name="submit_CV" value="Modifier CV">
-        </form>
-
-		<!--<a href="#" class="btn btn-success" role="button">Modifier le CV</a>-->
-		<a href="settings.php" class="btn btn-success" role="button">Modifier le profil</a>
 	</div>
 	</div>
 </div>
@@ -107,21 +94,21 @@
 	
 	<?php
 		
-		$get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" . $_SESSION['ID_user'] .
-			"UNION SELECT ID_user2 as UserFROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_SESSION['ID_user'];
+		$get_friends="SELECT ID_user1 as User FROM connect_with INNER JOIN connect_with ON ID_user2 =" .$_POST['id'].
+			"UNION SELECT ID_user2 as UserFROM connect_with INNER JOIN connect_with ON ID_user1 =" . $_POST['id'];
 
 		
 		$posts = $bdd->query("SELECT u1.name AS author_n, u1.first_name AS author_f_n, u1.profile_pic,
 		publication.ID_post, publication.date, publication.time, publication.text, publication.location, publication.emotion, publication.media_link, publication.nb_like
 		FROM publication
 		INNER JOIN user u1 ON u1.ID_user = publication.ID_author
-		WHERE ID_user=".$_SESSION['ID_user']."
+		WHERE ID_user=".$_POST['id']."
 		ORDER BY publication.date DESC, publication.time DESC");
 
 		echo '<div class="col-md-12">';
 		while ($data = $posts->fetch())
 		{
-			include ("post.php");
+			include ("post2.php");
 		}
 		echo '</div>';
 	$posts->closeCursor();
@@ -133,7 +120,7 @@
             $target_file=" ";
         }
         else {
-            $target_dir = "user".$_SESSION['ID_user'];
+            $target_dir = "user".$_POST['id'];
             if (!is_dir($target_dir))
                 mkdir($target_dir);
 
@@ -158,7 +145,7 @@
             }
         }
 
-        $sql="UPDATE user SET CV_link = '".$target_file. "' WHERE ID_user = " . $_SESSION['ID_user'];
+        $sql="UPDATE user SET CV_link = '".$target_file. "' WHERE ID_user = " . $_POST['id'];
         //echo $sql;
         $bdd->exec($sql);
     }

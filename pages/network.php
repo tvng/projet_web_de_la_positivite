@@ -26,14 +26,41 @@ session_start();
   <script src="//code.jquery.com/jquery.min.js"></script>
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
+
+	<script src="jquery.redirect.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.go_to_pro').click(function(){
+				
+				
+				var buttonValue = $(this).val();
+				var id_btn =$("#p").attr("name") ;
+
+				var ajaxurl = "profile2.php",
+				data =  {'action': buttonValue,
+				'id': id_btn,
+				};
+				
+				$.post(ajaxurl, data, function (response) {
+					// Response div goes here
+					$.redirect('profile2.php', {'id': id_btn});
+					
+				})  
+
+				
+				.done(function( response ){
+					delete id_btn;
+				});
+			});
+		});
+	</script>
+	
 	<script type="text/javascript">
 	$(document).ready(function(){
 		
 		$('.add_friend').click(function(){
-			
 			var buttonValue = $(this).val();
-			var id_btn =$("#a").attr("name") ;
-			var txt = $("#t").val();
+			var id_btn =$("#p").attr("name") ;
 
 			var ajaxurl = "network_traitement2.php",
 			data =  {'action': buttonValue,
@@ -46,11 +73,10 @@ session_start();
 			})  
 			
 			.done(function( response ){
-		alert(response);
-	});
+			});
 		});
 
-		}); </script>
+	}); </script>
 </head>
 
 <body>
@@ -61,11 +87,6 @@ session_start();
 
 </header>
 
-
-<br/>
-- rechercher des gens et proposer de les ajouter en ami
-<br />
-- proposer de supprimer des amis  (additionnel)
 
 <?php
     try {
@@ -225,11 +246,6 @@ while ($sl_data = $sl->fetch()) {
 
 
 
-<!--  invitations           -->
-<div class="container col-sm-8" >
-	<h3>Mes invitations</h3>
-</div>
-
 <!--  AFFICHAGE DES AMIS -->
 <div class="container col-sm-8" >
 	<h3>Mon reseau</h3>
@@ -255,7 +271,7 @@ while ($sl_data = $sl->fetch()) {
 			echo   '<div class="card-img-overlay" style="background-color: rgba(255, 255, 255, 0.5);">
 			<h3 class="card-title">'.$fl_data["name"].' '.$fl_data["first_name"].'</h3>
 			<form method="post">
-			<a href="#" name="'. $fl_data['ID_user'] .'" class="btn btn-success" value="voir_profil">Voir le profil</a>
+			<input id="p" type="submit" class="go_to_pro" name="'.$fl_data['ID_user'].'" value="Voir le profil">
 			<input class="btn" type="submit" value="Supprimer des amis" name="del_'.$fl_data['ID_user'].'">
 			</form></div>';
 			
